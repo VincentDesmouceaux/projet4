@@ -1,0 +1,12 @@
+{
+  "tournaments": [
+    {
+      "name": "Championnat Local",
+      "location": "Paris",
+      "start_date": "2024-04-04",
+      "end_date": "2024-04-05",
+      "description": "Un tournoi très intéressant.",
+      "players": ["AB12345", "CD67890"]
+    }
+  ]
+}

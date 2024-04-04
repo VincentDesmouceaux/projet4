@@ -1,0 +1,16 @@
+{
+  "players": [
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "birth_date": "1990-01-01",
+      "chess_id": "AB12345"
+    },
+    {
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "birth_date": "1992-02-02",
+      "chess_id": "CD67890"
+    }
+  ]
+}
