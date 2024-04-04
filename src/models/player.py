@@ -16,4 +16,7 @@ class Player:
     first_name: str
     last_name: str
     birth_date: datetime.date
+    chess_id: str
     
+    def __str__(self):
+        return f'Player: {self.first_name} {self.last_name}, Birth Date: {self.birth_date}, ID: {self.chess_id}'

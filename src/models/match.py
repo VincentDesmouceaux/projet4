@@ -14,3 +14,6 @@ class Match:
     """
     players: Tuple[Player, Player]
     score: Tuple[float, float] = field(default_factory=lambda: (0.0, 0.0))
+
+    def __str__(self):
+        return f'Match between {self.players[0]} and {self.players[1]}, Score: {self.score}'

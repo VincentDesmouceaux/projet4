@@ -25,3 +25,7 @@ class Round:
 
     def add_match(self, match: Match):
         self.matches.append(match)
+
+    def __str__(self):
+        matches_str = "\n    ".join(str(match) for match in self.matches)
+        return f'Round: {self.name}, Start: {self.start_time}, End: {self.end_time}\n    Matches:\n    {matches_str}'    

@@ -28,10 +28,11 @@ class Tournament:
     location: str
     start_date: datetime.date
     end_date: datetime.date
+    description: str = ''  # Valeur par défaut ajoutée ici
     rounds: List[Round] = field(default_factory=list)
     players: List[Player] = field(default_factory=list)
-    description: str
     current_round: int = 0
+
 
     def add_round(self, round_: Round):
         self.rounds.append(round_)
@@ -39,3 +40,12 @@ class Tournament:
 
     def add_player(self, player: Player):
         self.players.append(player)
+
+    def __str__(self):
+        players_str = ", ".join(str(player) for player in self.players)
+        rounds_str = "\n    ".join(str(round) for round in self.rounds)
+        return f'''Tournament: {self.name}, Location: {self.location}, Dates: {self.start_date} to {self.end_date}
+Description: {self.description}
+Players: {players_str}
+Rounds:
+    {rounds_str}'''
