@@ -1,2 +1,7 @@
 .DS_Store
 /venv
+.flake8
+.*
+__*
+!.gitignore
+!__init__.py
