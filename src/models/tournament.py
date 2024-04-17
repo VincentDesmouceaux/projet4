@@ -28,7 +28,7 @@ class Tournament:
     location: str
     start_date: datetime.date
     end_date: datetime.date
-    description: str = ''  # Valeur par défaut ajoutée ici
+    description: str = ''  
     rounds: List[Round] = field(default_factory=list)
     players: List[Player] = field(default_factory=list)
     current_round: int = 0
