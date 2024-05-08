@@ -11,17 +11,23 @@ class TournamentManager:
     def __init__(self, filepath):
         self.filepath = Path(filepath)
         self.tournaments = []
+        self.load_tournaments_from_file()
 
-    def get_tournament_names(self):
-        return [tournament.name for tournament in self.tournaments]
+    def load_tournaments_from_file(self):
+        if self.filepath.exists():
+            with self.filepath.open("r", encoding="utf-8") as file:
+                data = json.load(file)
+                self.load_tournaments(data.get('tournaments', []))
+        else:
+            print("No file found, starting with an empty list of tournaments.")
 
     def load_tournaments(self, tournaments_data):
         self.tournaments = [self.deserialize_tournament(t_data) for t_data in tournaments_data]
 
     def deserialize_tournament(self, data):
         players = [Player(**player_data) for player_data in data.get("players", [])]
-        rounds = [Round(**round_data) for round_data in data.get("rounds", [])]
         data["players"] = players
+        rounds = [Round(**round_data) for round_data in data.get("rounds", [])]
         data["rounds"] = rounds
         return Tournament(**data)
 
@@ -32,11 +38,15 @@ class TournamentManager:
 
     def serialize_tournament(self, tournament):
         tournament_data = tournament.as_dict()
+        tournament_data["players"] = [player.as_dict() for player in tournament.players]
         return tournament_data
+
+    def get_tournament_names(self):
+        return [tournament.name for tournament in self.tournaments]
 
     def get_tournament_details(self, tournament_name):
         tournament = next((t for t in self.tournaments if t.name.lower() == tournament_name.lower()), None)
-        if tournament is None:
+        if not tournament:
             raise ValueError("No tournament found with the name specified.")
         return tournament
 
@@ -62,3 +72,6 @@ class TournamentManager:
             match = Match(players=(tournament.players[i], tournament.players[i + 1]))
             match.play_match()
             round.add_match(match)
+
+    def get_all_tournaments(self):
+        return self.tournaments

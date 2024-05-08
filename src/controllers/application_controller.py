@@ -3,7 +3,7 @@ from pathlib import Path
 from controllers.report_manager import ReportManager
 from controllers.user_manager import UserManager
 from controllers.tournament_manager import TournamentManager
-from views.menu_view import display_welcome, display_main_menu, display_tournament_selection, display_report_menu, select_tournament
+from views.menu_view import display_welcome, display_main_menu, display_tournament_selection, display_report_menu
 
 
 class ApplicationController:
@@ -22,6 +22,7 @@ class ApplicationController:
 
     def start(self):
         start_action = display_welcome()
+
         if start_action.lower() == "oui":
             self.run_existing_tournament()
         else:
@@ -35,7 +36,7 @@ class ApplicationController:
         while True:
             choice = display_main_menu()
             if choice == '1':
-                # Logique de création d'un nouveau tournoi (à implémenter)
+                # Supposer que cette fonction crée un nouveau tournoi (à implémenter)
                 pass
             elif choice == '2':
                 self.report_menu_loop()
@@ -52,15 +53,15 @@ class ApplicationController:
             elif choice == '2':
                 self.report_manager.list_all_tournaments()
             elif choice == '3':
-                tournament_name = select_tournament(self.report_manager.get_tournament_names())
+                tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
                 self.report_manager.show_tournament_details(tournament_name)
             elif choice == '4':
-                tournament_name = select_tournament(self.report_manager.get_tournament_names())
-                self.report_manager.list_tournament_players(tournament_name)
+                tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
+                self.report_manager.show_tournament_players_alphabetically(tournament_name)
             elif choice == '5':
-                tournament_name = select_tournament(self.report_manager.get_tournament_names())
-                self.report_manager.list_tournament_rounds_and_matches(tournament_name)
+                tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
+                self.report_manager.show_tournament_rounds_and_matches(tournament_name)
             elif choice == '6':
-                break  # Retour au menu principal
+                break  # Retourner au menu principal
             else:
                 print("Option invalide, veuillez réessayer.")
