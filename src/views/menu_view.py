@@ -12,8 +12,7 @@ def display_main_menu():
 
 
 def display_tournament_selection(tournaments):
-    print("Sélectionnez un tournoi parmi les suivants:")
-    print("\n")
+    print("Sélectionnez un tournoi parmi les suivants:\n")
     for index, tournament in enumerate(tournaments, start=1):
         print(f"{index}. {tournament}")
 
@@ -39,21 +38,3 @@ def display_report_menu():
     print("5. Liste de tous les tours du tournoi et de tous les matchs du tour")
     print("6. Retourner au menu principal")
     return input("\nEntrez votre choix : ")
-
-
-def select_tournament(tournaments):
-    print("Sélectionnez un tournoi parmi les suivants:")
-    for index, tournament in enumerate(tournaments, start=1):
-        print(f"{index}. {tournament}")
-
-    selection = input("\nEntrez le numéro du tournoi : ")
-    try:
-        selected_index = int(selection) - 1
-        if 0 <= selected_index < len(tournaments):
-            return tournaments[selected_index]
-        else:
-            print("\nNuméro invalide, veuillez réessayer.\n")
-            return select_tournament(tournaments)
-    except ValueError:
-        print("\nVeuillez entrer un nombre valide.\n")
-        return select_tournament(tournaments)

@@ -22,7 +22,6 @@ class ApplicationController:
 
     def start(self):
         start_action = display_welcome()
-
         if start_action.lower() == "oui":
             self.run_existing_tournament()
         else:

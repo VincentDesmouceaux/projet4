@@ -1,5 +1,4 @@
 import json
-import sys  # Ajoutez cet import
 from pathlib import Path
 from views.report_view import (
     display_all_tournaments,
@@ -9,6 +8,7 @@ from views.report_view import (
     display_tournament_rounds_and_matches
 )
 from models.player import Player
+from controllers.export_manager import ExportManager  # Importer le nouveau contrôleur
 
 
 class ReportManager:
@@ -16,6 +16,7 @@ class ReportManager:
         self.tournament_manager = tournament_manager
         self.user_manager = user_manager
         self.file_path = Path(file_path)
+        self.export_manager = ExportManager()  # Créer une instance d'ExportManager
         self.load_data()
 
     def load_data(self):
@@ -42,17 +43,17 @@ class ReportManager:
     def list_all_tournaments(self):
         tournaments = self.tournament_manager.get_all_tournaments()
         display_all_tournaments(tournaments)
-        self.ask_to_export_report("all_tournaments.txt", display_all_tournaments, tournaments)
+        self.ask_to_export_report("all_tournaments", display_all_tournaments, tournaments)
 
     def list_all_players(self):
         players = self.user_manager.get_all_players()
         display_all_players_alphabetically(players)
-        self.ask_to_export_report("all_players.txt", display_all_players_alphabetically, players)
+        self.ask_to_export_report("all_players", display_all_players_alphabetically, players)
 
     def show_tournament_details(self, tournament_name):
         tournament = self.tournament_manager.get_tournament_details(tournament_name)
         display_tournament_details(tournament)
-        self.ask_to_export_report(f"tournament_details_{tournament_name}.txt", display_tournament_details, tournament)
+        self.ask_to_export_report(f"tournament_details_{tournament_name}", display_tournament_details, tournament)
 
     def get_tournament_names(self):
         return self.tournament_manager.get_tournament_names()
@@ -60,27 +61,23 @@ class ReportManager:
     def show_tournament_players_alphabetically(self, tournament_name):
         tournament = self.tournament_manager.get_tournament_details(tournament_name)
         display_tournament_players_alphabetically(tournament)
-        self.ask_to_export_report(f"tournament_players_{tournament_name}.txt",
+        self.ask_to_export_report(f"tournament_players_{tournament_name}",
                                   display_tournament_players_alphabetically, tournament)
 
     def show_tournament_rounds_and_matches(self, tournament_name):
         tournament = self.tournament_manager.get_tournament_details(tournament_name)
         display_tournament_rounds_and_matches(tournament)
-        self.ask_to_export_report(f"tournament_rounds_{tournament_name}.txt",
+        self.ask_to_export_report(f"tournament_rounds_{tournament_name}",
                                   display_tournament_rounds_and_matches, tournament)
 
     def ask_to_export_report(self, filename, display_function, data):
         choice = input("Souhaitez-vous imprimer ce rapport ? (Oui/Non) : ")
         if choice.lower() == 'oui':
-            self.export_report(filename, display_function, data)
-
-    def export_report(self, filename, display_function, data):
-        reports_dir = Path('src/rapports')
-        reports_dir.mkdir(exist_ok=True)
-        report_path = reports_dir / filename
-        with report_path.open('w', encoding='utf-8') as file:
-            original_stdout = sys.stdout
-            sys.stdout = file
-            display_function(data)
-            sys.stdout = original_stdout
-        print(f"Rapport sauvegardé sous {report_path}")
+            format_choice = input("Choisissez le format : 1. Texte brut, 2. HTML, 3. Les deux : ")
+            if format_choice == '1':
+                self.export_manager.export_report(filename + ".txt", display_function, data)
+            elif format_choice == '2':
+                self.export_manager.export_report_html(filename + ".html", display_function, data)
+            elif format_choice == '3':
+                self.export_manager.export_report(filename + ".txt", display_function, data)
+                self.export_manager.export_report_html(filename + ".html", display_function, data)
