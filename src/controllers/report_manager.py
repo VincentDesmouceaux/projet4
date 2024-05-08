@@ -15,16 +15,18 @@ class ReportManager:
     def __init__(self, tournament_manager, user_manager):
         self.tournament_manager = tournament_manager
         self.user_manager = user_manager
-        self.export_manager = ExportManager()  # Créer une instance d'ExportManager
-        self.file_path = tournament_manager.filepath  # Utiliser le même chemin de fichier que TournamentManager
+        self.export_manager = ExportManager()
         self.load_data()
 
     def load_data(self):
-        if self.file_path.exists():
-            with self.file_path.open('r', encoding='utf-8') as file:
+        if self.tournament_manager.filepath.exists():
+            with self.tournament_manager.filepath.open('r', encoding='utf-8') as file:
                 data = json.load(file)
                 self.tournament_manager.load_tournaments(data.get('tournaments', []))
-                self.user_manager.load_players(data.get('players', []))
+                players = []
+                for tournament in self.tournament_manager.tournaments:
+                    players.extend(tournament.players)
+                self.user_manager.load_players(players)
         else:
             print("Starting with an empty dataset.")
 
@@ -33,9 +35,8 @@ class ReportManager:
             "tournaments": self.tournament_manager.get_tournaments_data(),
             "players": [player.as_dict() for player in self.user_manager.get_all_players()]
         }
-        with self.file_path.open('w', encoding='utf-8') as file:
+        with self.tournament_manager.filepath.open('w', encoding='utf-8') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
-        print(f"Data saved to {self.file_path}")
 
     def list_all_tournaments(self):
         tournaments = self.tournament_manager.get_all_tournaments()
