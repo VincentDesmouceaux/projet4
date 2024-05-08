@@ -1,240 +1,657 @@
 {
-  "tournaments": [
-    {
-      "name": "Open de Paris",
-      "location": "Paris",
-      "start_date": "2024-04-01",
-      "end_date": "2024-04-03",
-      "number_of_rounds": 4,
-      "current_round": 0,
-      "description": "Tournoi ouvert avec des participants de tous niveaux.",
-      "players": [
+    "tournaments": [
         {
-          "first_name": "John",
-          "last_name": "Doe",
-          "birth_date": "1990-01-01",
-          "chess_id": "AB12345"
+            "name": "Open de Paris",
+            "location": "Paris",
+            "start_date": "2024-04-01",
+            "end_date": "2024-04-03",
+            "description": "Tournoi ouvert avec des participants de tous niveaux.",
+            "number_of_rounds": 4,
+            "current_round": 4,
+            "players": [
+                {
+                    "first_name": "Omar",
+                    "last_name": "Ali",
+                    "birth_date": "1987-07-30",
+                    "chess_id": "KL56789",
+                    "score": 4.5
+                },
+                {
+                    "first_name": "Mark",
+                    "last_name": "Wright",
+                    "birth_date": "1991-06-22",
+                    "chess_id": "GH89123",
+                    "score": 4.5
+                },
+                {
+                    "first_name": "Alice",
+                    "last_name": "Wong",
+                    "birth_date": "1988-05-19",
+                    "chess_id": "EF34567",
+                    "score": 4.5
+                },
+                {
+                    "first_name": "Nora",
+                    "last_name": "Khan",
+                    "birth_date": "1985-03-14",
+                    "chess_id": "IJ12345",
+                    "score": 3.5
+                },
+                {
+                    "first_name": "Patricia",
+                    "last_name": "Miller",
+                    "birth_date": "1994-08-25",
+                    "chess_id": "MN34567",
+                    "score": 4.0
+                },
+                {
+                    "first_name": "Jane",
+                    "last_name": "Doe",
+                    "birth_date": "1992-02-02",
+                    "chess_id": "CD67890",
+                    "score": 3.0
+                },
+                {
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "birth_date": "1990-01-01",
+                    "chess_id": "AB12345",
+                    "score": 4.5
+                },
+                {
+                    "first_name": "Quincy",
+                    "last_name": "Jones",
+                    "birth_date": "1992-12-17",
+                    "chess_id": "OP78901",
+                    "score": 3.5
+                }
+            ],
+            "rounds": [
+                {
+                    "name": "Round 1",
+                    "matches": [
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Mark",
+                                    "last_name": "Wright",
+                                    "birth_date": "1991-06-22",
+                                    "chess_id": "GH89123",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Quincy",
+                                    "last_name": "Jones",
+                                    "birth_date": "1992-12-17",
+                                    "chess_id": "OP78901",
+                                    "score": 3.5
+                                }
+                            ],
+                            "score": [
+                                1,
+                                0
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "birth_date": "1990-01-01",
+                                    "chess_id": "AB12345",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Patricia",
+                                    "last_name": "Miller",
+                                    "birth_date": "1994-08-25",
+                                    "chess_id": "MN34567",
+                                    "score": 4.0
+                                }
+                            ],
+                            "score": [
+                                0.5,
+                                0.5
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Nora",
+                                    "last_name": "Khan",
+                                    "birth_date": "1985-03-14",
+                                    "chess_id": "IJ12345",
+                                    "score": 3.5
+                                },
+                                {
+                                    "first_name": "Alice",
+                                    "last_name": "Wong",
+                                    "birth_date": "1988-05-19",
+                                    "chess_id": "EF34567",
+                                    "score": 4.5
+                                }
+                            ],
+                            "score": [
+                                0,
+                                1
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Omar",
+                                    "last_name": "Ali",
+                                    "birth_date": "1987-07-30",
+                                    "chess_id": "KL56789",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Jane",
+                                    "last_name": "Doe",
+                                    "birth_date": "1992-02-02",
+                                    "chess_id": "CD67890",
+                                    "score": 3.0
+                                }
+                            ],
+                            "score": [
+                                1,
+                                0
+                            ]
+                        }
+                    ],
+                    "start_time": "2024-05-08T18:28:53.318307",
+                    "end_time": "2024-05-08T18:28:53.318364"
+                },
+                {
+                    "name": "Round 2",
+                    "matches": [
+                        {
+                            "players": [
+                                {
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "birth_date": "1990-01-01",
+                                    "chess_id": "AB12345",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Omar",
+                                    "last_name": "Ali",
+                                    "birth_date": "1987-07-30",
+                                    "chess_id": "KL56789",
+                                    "score": 4.5
+                                }
+                            ],
+                            "score": [
+                                0.5,
+                                0.5
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Jane",
+                                    "last_name": "Doe",
+                                    "birth_date": "1992-02-02",
+                                    "chess_id": "CD67890",
+                                    "score": 3.0
+                                },
+                                {
+                                    "first_name": "Mark",
+                                    "last_name": "Wright",
+                                    "birth_date": "1991-06-22",
+                                    "chess_id": "GH89123",
+                                    "score": 4.5
+                                }
+                            ],
+                            "score": [
+                                0,
+                                1
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Patricia",
+                                    "last_name": "Miller",
+                                    "birth_date": "1994-08-25",
+                                    "chess_id": "MN34567",
+                                    "score": 4.0
+                                },
+                                {
+                                    "first_name": "Quincy",
+                                    "last_name": "Jones",
+                                    "birth_date": "1992-12-17",
+                                    "chess_id": "OP78901",
+                                    "score": 3.5
+                                }
+                            ],
+                            "score": [
+                                0.5,
+                                0.5
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Alice",
+                                    "last_name": "Wong",
+                                    "birth_date": "1988-05-19",
+                                    "chess_id": "EF34567",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Nora",
+                                    "last_name": "Khan",
+                                    "birth_date": "1985-03-14",
+                                    "chess_id": "IJ12345",
+                                    "score": 3.5
+                                }
+                            ],
+                            "score": [
+                                0,
+                                1
+                            ]
+                        }
+                    ],
+                    "start_time": "2024-05-08T18:28:53.319534",
+                    "end_time": "2024-05-08T18:28:53.319558"
+                },
+                {
+                    "name": "Round 3",
+                    "matches": [
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Nora",
+                                    "last_name": "Khan",
+                                    "birth_date": "1985-03-14",
+                                    "chess_id": "IJ12345",
+                                    "score": 3.5
+                                },
+                                {
+                                    "first_name": "Alice",
+                                    "last_name": "Wong",
+                                    "birth_date": "1988-05-19",
+                                    "chess_id": "EF34567",
+                                    "score": 4.5
+                                }
+                            ],
+                            "score": [
+                                0.5,
+                                0.5
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Quincy",
+                                    "last_name": "Jones",
+                                    "birth_date": "1992-12-17",
+                                    "chess_id": "OP78901",
+                                    "score": 3.5
+                                },
+                                {
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "birth_date": "1990-01-01",
+                                    "chess_id": "AB12345",
+                                    "score": 4.5
+                                }
+                            ],
+                            "score": [
+                                1,
+                                0
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Jane",
+                                    "last_name": "Doe",
+                                    "birth_date": "1992-02-02",
+                                    "chess_id": "CD67890",
+                                    "score": 3.0
+                                },
+                                {
+                                    "first_name": "Patricia",
+                                    "last_name": "Miller",
+                                    "birth_date": "1994-08-25",
+                                    "chess_id": "MN34567",
+                                    "score": 4.0
+                                }
+                            ],
+                            "score": [
+                                0,
+                                1
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Mark",
+                                    "last_name": "Wright",
+                                    "birth_date": "1991-06-22",
+                                    "chess_id": "GH89123",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Omar",
+                                    "last_name": "Ali",
+                                    "birth_date": "1987-07-30",
+                                    "chess_id": "KL56789",
+                                    "score": 4.5
+                                }
+                            ],
+                            "score": [
+                                1,
+                                0
+                            ]
+                        }
+                    ],
+                    "start_time": "2024-05-08T18:28:53.320671",
+                    "end_time": "2024-05-08T18:28:53.320693"
+                },
+                {
+                    "name": "Round 4",
+                    "matches": [
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Omar",
+                                    "last_name": "Ali",
+                                    "birth_date": "1987-07-30",
+                                    "chess_id": "KL56789",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Mark",
+                                    "last_name": "Wright",
+                                    "birth_date": "1991-06-22",
+                                    "chess_id": "GH89123",
+                                    "score": 4.5
+                                }
+                            ],
+                            "score": [
+                                0.5,
+                                0.5
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Alice",
+                                    "last_name": "Wong",
+                                    "birth_date": "1988-05-19",
+                                    "chess_id": "EF34567",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Nora",
+                                    "last_name": "Khan",
+                                    "birth_date": "1985-03-14",
+                                    "chess_id": "IJ12345",
+                                    "score": 3.5
+                                }
+                            ],
+                            "score": [
+                                0,
+                                1
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "Patricia",
+                                    "last_name": "Miller",
+                                    "birth_date": "1994-08-25",
+                                    "chess_id": "MN34567",
+                                    "score": 4.0
+                                },
+                                {
+                                    "first_name": "Jane",
+                                    "last_name": "Doe",
+                                    "birth_date": "1992-02-02",
+                                    "chess_id": "CD67890",
+                                    "score": 3.0
+                                }
+                            ],
+                            "score": [
+                                0,
+                                1
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "birth_date": "1990-01-01",
+                                    "chess_id": "AB12345",
+                                    "score": 4.5
+                                },
+                                {
+                                    "first_name": "Quincy",
+                                    "last_name": "Jones",
+                                    "birth_date": "1992-12-17",
+                                    "chess_id": "OP78901",
+                                    "score": 3.5
+                                }
+                            ],
+                            "score": [
+                                0.5,
+                                0.5
+                            ]
+                        }
+                    ],
+                    "start_time": "2024-05-08T18:28:53.321693",
+                    "end_time": "2024-05-08T18:28:53.321712"
+                }
+            ]
         },
         {
-          "first_name": "Jane",
-          "last_name": "Doe",
-          "birth_date": "1992-02-02",
-          "chess_id": "CD67890"
+            "name": "Championnat de Lyon",
+            "location": "Lyon",
+            "start_date": "2024-05-12",
+            "end_date": "2024-05-14",
+            "description": "Un événement majeur dans le calendrier échiquéen français, avec des joueurs de haut niveau.",
+            "number_of_rounds": 4,
+            "current_round": 0,
+            "players": [
+                {
+                    "first_name": "Bob",
+                    "last_name": "Johnson",
+                    "birth_date": "1983-07-24",
+                    "chess_id": "QR23456",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Clara",
+                    "last_name": "Smith",
+                    "birth_date": "1985-12-15",
+                    "chess_id": "ST67890",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "David",
+                    "last_name": "Lee",
+                    "birth_date": "1991-03-30",
+                    "chess_id": "UV12345",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Emily",
+                    "last_name": "Taylor",
+                    "birth_date": "1994-08-25",
+                    "chess_id": "WX56789",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Frank",
+                    "last_name": "Ocean",
+                    "birth_date": "1990-10-28",
+                    "chess_id": "YZ12345",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Grace",
+                    "last_name": "Hartzel",
+                    "birth_date": "1993-11-16",
+                    "chess_id": "AB23456",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Henry",
+                    "last_name": "Gold",
+                    "birth_date": "1988-06-03",
+                    "chess_id": "CD34567",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Isabella",
+                    "last_name": "Yuan",
+                    "birth_date": "1995-02-15",
+                    "chess_id": "EF45678",
+                    "score": 0.0
+                }
+            ],
+            "rounds": []
         },
         {
-          "first_name": "Alice",
-          "last_name": "Wong",
-          "birth_date": "1988-05-19",
-          "chess_id": "EF34567"
+            "name": "Tournoi des Champions",
+            "location": "Marseille",
+            "start_date": "2024-06-20",
+            "end_date": "2024-06-22",
+            "description": "Tournoi réservé aux vainqueurs des compétitions précédentes de l'année.",
+            "number_of_rounds": 4,
+            "current_round": 0,
+            "players": [
+                {
+                    "first_name": "Fiona",
+                    "last_name": "Green",
+                    "birth_date": "1989-11-11",
+                    "chess_id": "GH56789",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "George",
+                    "last_name": "Brown",
+                    "birth_date": "1990-04-05",
+                    "chess_id": "IJ67890",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Hannah",
+                    "last_name": "Davis",
+                    "birth_date": "1992-09-17",
+                    "chess_id": "KL78901",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Ivan",
+                    "last_name": "Kowalski",
+                    "birth_date": "1986-12-01",
+                    "chess_id": "MN89012",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Jasmine",
+                    "last_name": "Alvarez",
+                    "birth_date": "1995-07-07",
+                    "chess_id": "OP90123",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Kyle",
+                    "last_name": "Norman",
+                    "birth_date": "1984-03-15",
+                    "chess_id": "QR01234",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Laura",
+                    "last_name": "O'Neil",
+                    "birth_date": "1989-01-22",
+                    "chess_id": "ST12345",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Miguel",
+                    "last_name": "Santos",
+                    "birth_date": "1991-08-19",
+                    "chess_id": "UV23456",
+                    "score": 0.0
+                }
+            ],
+            "rounds": []
         },
         {
-          "first_name": "Mark",
-          "last_name": "Wright",
-          "birth_date": "1991-06-22",
-          "chess_id": "GH89123"
-        },
-        {
-          "first_name": "Nora",
-          "last_name": "Khan",
-          "birth_date": "1985-03-14",
-          "chess_id": "IJ12345"
-        },
-        {
-          "first_name": "Omar",
-          "last_name": "Ali",
-          "birth_date": "1987-07-30",
-          "chess_id": "KL56789"
-        },
-        {
-          "first_name": "Patricia",
-          "last_name": "Miller",
-          "birth_date": "1994-08-25",
-          "chess_id": "MN34567"
-        },
-        {
-          "first_name": "Quincy",
-          "last_name": "Jones",
-          "birth_date": "1992-12-17",
-          "chess_id": "OP78901"
+            "name": "Spring Classic",
+            "location": "Bordeaux",
+            "start_date": "2024-07-05",
+            "end_date": "2024-07-07",
+            "description": "Un tournoi classique pour les passionnés d'échecs, avec des défis pour tous les niveaux.",
+            "number_of_rounds": 4,
+            "current_round": 0,
+            "players": [
+                {
+                    "first_name": "Nathan",
+                    "last_name": "Moore",
+                    "birth_date": "1982-04-17",
+                    "chess_id": "WX23456",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Olivia",
+                    "last_name": "Wilde",
+                    "birth_date": "1996-12-10",
+                    "chess_id": "YZ34567",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Peyton",
+                    "last_name": "Mars",
+                    "birth_date": "1993-05-13",
+                    "chess_id": "AB45678",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Quinn",
+                    "last_name": "Fabray",
+                    "birth_date": "1987-09-25",
+                    "chess_id": "CD56789",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Rachel",
+                    "last_name": "Zane",
+                    "birth_date": "1992-11-02",
+                    "chess_id": "EF67890",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Steven",
+                    "last_name": "Gerrard",
+                    "birth_date": "1980-05-30",
+                    "chess_id": "GH78901",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Teresa",
+                    "last_name": "May",
+                    "birth_date": "1991-10-01",
+                    "chess_id": "IJ89012",
+                    "score": 0.0
+                },
+                {
+                    "first_name": "Ursula",
+                    "last_name": "Burns",
+                    "birth_date": "1994-03-17",
+                    "chess_id": "KL01234",
+                    "score": 0.0
+                }
+            ],
+            "rounds": []
         }
-      ]
-    },
-    {
-      "name": "Championnat de Lyon",
-      "location": "Lyon",
-      "start_date": "2024-05-12",
-      "end_date": "2024-05-14",
-      "number_of_rounds": 4,
-      "current_round": 0,
-      "description": "Un événement majeur dans le calendrier échiquéen français, avec des joueurs de haut niveau.",
-      "players": [
-        {
-          "first_name": "Bob",
-          "last_name": "Johnson",
-          "birth_date": "1983-07-24",
-          "chess_id": "QR23456"
-        },
-        {
-          "first_name": "Clara",
-          "last_name": "Smith",
-          "birth_date": "1985-12-15",
-          "chess_id": "ST67890"
-        },
-        {
-          "first_name": "David",
-          "last_name": "Lee",
-          "birth_date": "1991-03-30",
-          "chess_id": "UV12345"
-        },
-        {
-          "first_name": "Emily",
-          "last_name": "Taylor",
-          "birth_date": "1994-08-25",
-          "chess_id": "WX56789"
-        },
-        {
-          "first_name": "Frank",
-          "last_name": "Ocean",
-          "birth_date": "1990-10-28",
-          "chess_id": "YZ12345"
-        },
-        {
-          "first_name": "Grace",
-          "last_name": "Hartzel",
-          "birth_date": "1993-11-16",
-          "chess_id": "AB23456"
-        },
-        {
-          "first_name": "Henry",
-          "last_name": "Gold",
-          "birth_date": "1988-06-03",
-          "chess_id": "CD34567"
-        },
-        {
-          "first_name": "Isabella",
-          "last_name": "Yuan",
-          "birth_date": "1995-02-15",
-          "chess_id": "EF45678"
-        }
-      ]
-    },
-    {
-      "name": "Tournoi des Champions",
-      "location": "Marseille",
-      "start_date": "2024-06-20",
-      "end_date": "2024-06-22",
-      "number_of_rounds": 4,
-      "current_round": 0,
-      "description": "Tournoi réservé aux vainqueurs des compétitions précédentes de l'année.",
-      "players": [
-        {
-          "first_name": "Fiona",
-          "last_name": "Green",
-          "birth_date": "1989-11-11",
-          "chess_id": "GH56789"
-        },
-        {
-          "first_name": "George",
-          "last_name": "Brown",
-          "birth_date": "1990-04-05",
-          "chess_id": "IJ67890"
-        },
-        {
-          "first_name": "Hannah",
-          "last_name": "Davis",
-          "birth_date": "1992-09-17",
-          "chess_id": "KL78901"
-        },
-        {
-          "first_name": "Ivan",
-          "last_name": "Kowalski",
-          "birth_date": "1986-12-01",
-          "chess_id": "MN89012"
-        },
-        {
-          "first_name": "Jasmine",
-          "last_name": "Alvarez",
-          "birth_date": "1995-07-07",
-          "chess_id": "OP90123"
-        },
-        {
-          "first_name": "Kyle",
-          "last_name": "Norman",
-          "birth_date": "1984-03-15",
-          "chess_id": "QR01234"
-        },
-        {
-          "first_name": "Laura",
-          "last_name": "O'Neil",
-          "birth_date": "1989-01-22",
-          "chess_id": "ST12345"
-        },
-        {
-          "first_name": "Miguel",
-          "last_name": "Santos",
-          "birth_date": "1991-08-19",
-          "chess_id": "UV23456"
-        }
-      ]
-    },
-    {
-      "name": "Spring Classic",
-      "location": "Bordeaux",
-      "start_date": "2024-07-05",
-      "end_date": "2024-07-07",
-      "number_of_rounds": 4,
-      "current_round": 0,
-      "description": "Un tournoi classique pour les passionnés d'échecs, avec des défis pour tous les niveaux.",
-      "players": [
-        {
-          "first_name": "Nathan",
-          "last_name": "Moore",
-          "birth_date": "1982-04-17",
-          "chess_id": "WX23456"
-        },
-        {
-          "first_name": "Olivia",
-          "last_name": "Wilde",
-          "birth_date": "1996-12-10",
-          "chess_id": "YZ34567"
-        },
-        {
-          "first_name": "Peyton",
-          "last_name": "Mars",
-          "birth_date": "1993-05-13",
-          "chess_id": "AB45678"
-        },
-        {
-          "first_name": "Quinn",
-          "last_name": "Fabray",
-          "birth_date": "1987-09-25",
-          "chess_id": "CD56789"
-        },
-        {
-          "first_name": "Rachel",
-          "last_name": "Zane",
-          "birth_date": "1992-11-02",
-          "chess_id": "EF67890"
-        },
-        {
-          "first_name": "Steven",
-          "last_name": "Gerrard",
-          "birth_date": "1980-05-30",
-          "chess_id": "GH78901"
-        },
-        {
-          "first_name": "Teresa",
-          "last_name": "May",
-          "birth_date": "1991-10-01",
-          "chess_id": "IJ89012"
-        },
-        {
-          "first_name": "Ursula",
-          "last_name": "Burns",
-          "birth_date": "1994-03-17",
-          "chess_id": "KL01234"
-        }
-      ]
-    }
-  ]
+    ]
 }

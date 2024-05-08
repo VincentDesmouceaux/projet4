@@ -1,24 +1,20 @@
 import json
 from pathlib import Path
+from datetime import datetime
 from controllers.report_manager import ReportManager
 from controllers.user_manager import UserManager
 from controllers.tournament_manager import TournamentManager
 from views.menu_view import display_welcome, display_main_menu, display_tournament_selection, display_report_menu
+from views.tournament_view import get_tournament_data
+from views.player_view import get_player_data
 
 
 class ApplicationController:
     def __init__(self, filepath):
         self.file_path = Path(filepath)
-        data = self.load_data()
         self.user_manager = UserManager(filepath)
         self.tournament_manager = TournamentManager(filepath)
-        self.report_manager = ReportManager(self.tournament_manager, self.user_manager, filepath)
-
-    def load_data(self):
-        if self.file_path.exists():
-            with self.file_path.open('r', encoding='utf-8') as file:
-                return json.load(file)
-        return {}
+        self.report_manager = ReportManager(self.tournament_manager, self.user_manager)
 
     def start(self):
         start_action = display_welcome()
@@ -35,14 +31,35 @@ class ApplicationController:
         while True:
             choice = display_main_menu()
             if choice == '1':
-                # Supposer que cette fonction crée un nouveau tournoi (à implémenter)
-                pass
+                self.create_new_tournament()
             elif choice == '2':
                 self.report_menu_loop()
             elif choice == '3':
                 break  # Quitter l'application
             else:
                 print("Option invalide, veuillez réessayer.")
+
+    def create_new_tournament(self):
+        tournament_data = get_tournament_data()
+        print("Tournament data received.")
+
+        # Convertir les dates en objets datetime.date
+        tournament_data['start_date'] = datetime.strptime(tournament_data['start_date'], "%Y-%m-%d").date()
+        tournament_data['end_date'] = datetime.strptime(tournament_data['end_date'], "%Y-%m-%d").date()
+
+        players = []
+        for _ in range(4):
+            player_data = get_player_data()
+            print(f"Player data received: {player_data}")
+
+            # Convertir la date de naissance en objet datetime.date
+            player_data['birth_date'] = datetime.strptime(player_data['birth_date'], "%Y-%m-%d").date()
+            # Générer un chess_id unique
+            player_data['chess_id'] = self.user_manager.generate_unique_chess_id()
+            players.append(player_data)
+
+        self.tournament_manager.add_tournament(tournament_data, players)
+        print("Tournoi créé avec succès !")
 
     def report_menu_loop(self):
         while True:

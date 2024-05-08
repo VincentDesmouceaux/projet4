@@ -8,15 +8,15 @@ from views.report_view import (
     display_tournament_rounds_and_matches
 )
 from models.player import Player
-from controllers.export_manager import ExportManager  # Importer le nouveau contrôleur
+from controllers.export_manager import ExportManager
 
 
 class ReportManager:
-    def __init__(self, tournament_manager, user_manager, file_path):
+    def __init__(self, tournament_manager, user_manager):
         self.tournament_manager = tournament_manager
         self.user_manager = user_manager
-        self.file_path = Path(file_path)
         self.export_manager = ExportManager()  # Créer une instance d'ExportManager
+        self.file_path = tournament_manager.filepath  # Utiliser le même chemin de fichier que TournamentManager
         self.load_data()
 
     def load_data(self):
@@ -24,11 +24,7 @@ class ReportManager:
             with self.file_path.open('r', encoding='utf-8') as file:
                 data = json.load(file)
                 self.tournament_manager.load_tournaments(data.get('tournaments', []))
-                self.user_manager.players = [
-                    Player(**p_data) if isinstance(p_data, dict) else p_data
-                    for tournament in data.get('tournaments', [])
-                    for p_data in tournament.get('players', [])
-                ]
+                self.user_manager.load_players(data.get('players', []))
         else:
             print("Starting with an empty dataset.")
 
@@ -39,6 +35,7 @@ class ReportManager:
         }
         with self.file_path.open('w', encoding='utf-8') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
+        print(f"Data saved to {self.file_path}")
 
     def list_all_tournaments(self):
         tournaments = self.tournament_manager.get_all_tournaments()

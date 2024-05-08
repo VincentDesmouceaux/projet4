@@ -25,7 +25,8 @@ def display_round_details(round):
     print(f"Commencé à: {round.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Terminé à: {round.end_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
     for match in round.matches:
-        print(f"{match.players[0]} vs {match.players[1]} - Score: {match.score}")
+        print(f"{match.players[0].first_name} {match.players[0].last_name} vs {
+              match.players[1].first_name} {match.players[1].last_name} - Score: {match.score}")
     print("-- Fin du tour --\n")
 
 
@@ -35,3 +36,22 @@ def display_final_scores(tournament):
     for player in final_scores:
         print(f"{player.first_name} {player.last_name}: {player.score} points")
     print("========================\n\n")
+
+
+def get_tournament_data():
+    print("Entrez les détails du tournoi:")
+    name = input("Nom du tournoi: ")
+    location = input("Lieu: ")
+    start_date = input("Date de début (YYYY-MM-DD): ")
+    end_date = input("Date de fin (YYYY-MM-DD): ")
+    number_of_rounds = int(input("Nombre de tours: "))
+    description = input("Description: ")
+    return {
+        "name": name,
+        "location": location,
+        "start_date": start_date,
+        "end_date": end_date,
+        "number_of_rounds": number_of_rounds,
+        "current_round": 0,
+        "description": description
+    }

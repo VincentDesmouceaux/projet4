@@ -5,6 +5,7 @@ from models.player import Player
 from models.round import Round
 from models.match import Match
 from views.tournament_view import display_tournament_details, display_final_scores, display_round_details
+from datetime import datetime
 
 
 class TournamentManager:
@@ -22,24 +23,16 @@ class TournamentManager:
             print("No file found, starting with an empty list of tournaments.")
 
     def load_tournaments(self, tournaments_data):
-        self.tournaments = [self.deserialize_tournament(t_data) for t_data in tournaments_data]
-
-    def deserialize_tournament(self, data):
-        players = [Player(**player_data) for player_data in data.get("players", [])]
-        data["players"] = players
-        rounds = [Round(**round_data) for round_data in data.get("rounds", [])]
-        data["rounds"] = rounds
-        return Tournament(**data)
+        self.tournaments = [Tournament.from_dict(t_data) for t_data in tournaments_data]
 
     def save_tournaments(self):
         with self.filepath.open("w", encoding="utf-8") as file:
             json.dump({"tournaments": [self.serialize_tournament(t)
                       for t in self.tournaments]}, file, indent=4, ensure_ascii=False)
+        print(f"Saved {len(self.tournaments)} tournaments.")
 
     def serialize_tournament(self, tournament):
-        tournament_data = tournament.as_dict()
-        tournament_data["players"] = [player.as_dict() for player in tournament.players]
-        return tournament_data
+        return tournament.as_dict()
 
     def get_tournament_names(self):
         return [tournament.name for tournament in self.tournaments]
@@ -56,6 +49,7 @@ class TournamentManager:
         while tournament.current_round < tournament.number_of_rounds:
             self.run_round(tournament)
         display_final_scores(tournament)
+        self.save_tournaments()
 
     def run_round(self, tournament):
         round = Round(name=f"Round {tournament.current_round + 1}")
@@ -64,6 +58,7 @@ class TournamentManager:
         round.end_round()
         tournament.add_round(round)
         display_round_details(round)
+        self.save_tournaments()
 
     def generate_and_play_matches(self, tournament, round):
         from random import shuffle
@@ -75,3 +70,11 @@ class TournamentManager:
 
     def get_all_tournaments(self):
         return self.tournaments
+
+    def add_tournament(self, tournament_data):
+        players = [Player(**player_data) for player_data in tournament_data['players']]
+        tournament_data['players'] = players
+        new_tournament = Tournament(**tournament_data)
+        self.tournaments.append(new_tournament)
+        self.save_tournaments()
+        print(f"Tournoi {new_tournament.name} ajouté avec succès.")

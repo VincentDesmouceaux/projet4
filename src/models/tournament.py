@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 from typing import List
 import datetime
-from .round import Round  # Assurez-vous que ce chemin est correct
-from .player import Player  # Assurez-vous que ce chemin est correct
+from .round import Round
+from .player import Player
 
 
 @dataclass
@@ -49,3 +49,21 @@ class Tournament:
             "players": [player.as_dict() for player in self.players],
             "rounds": [round.as_dict() for round in self.rounds]
         }
+
+    @classmethod
+    def from_dict(cls, data):
+        start_date = datetime.datetime.strptime(data["start_date"], "%Y-%m-%d").date()
+        end_date = datetime.datetime.strptime(data["end_date"], "%Y-%m-%d").date()
+        players = [Player.from_dict(p_data) for p_data in data["players"]]
+        rounds = [Round.from_dict(r_data) for r_data in data.get("rounds", [])]  # Handle missing 'rounds' key
+        return cls(
+            name=data["name"],
+            location=data["location"],
+            start_date=start_date,
+            end_date=end_date,
+            description=data["description"],
+            number_of_rounds=data["number_of_rounds"],
+            current_round=data.get("current_round", 0),
+            players=players,
+            rounds=rounds
+        )
