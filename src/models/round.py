@@ -50,3 +50,11 @@ class Round:
         else:
             round_details += "No matches played yet."
         return round_details
+
+    def as_dict(self):
+        return {
+            "name": self.name,
+            "matches": [match.as_dict() for match in self.matches],
+            "start_time": self.start_time.isoformat() if self.start_time else None,
+            "end_time": self.end_time.isoformat() if self.end_time else None
+        }

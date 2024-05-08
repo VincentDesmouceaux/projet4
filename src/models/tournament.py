@@ -12,28 +12,20 @@ class Tournament:
     start_date: datetime.date
     end_date: datetime.date
     description: str
-    number_of_rounds: int  # Déplacé avant les champs avec des valeurs par défaut
+    number_of_rounds: int
     rounds: List[Round] = field(default_factory=list)
     players: List[Player] = field(default_factory=list)
     current_round: int = 0
 
     def add_player(self, player: Player):
-        """Ajoute un joueur à la liste des participants du tournoi."""
         self.players.append(player)
 
     def add_round(self, round: Round):
-        """Ajoute un tour à la liste des tours du tournoi et incrémente le compteur de rounds actuels."""
-        print("Adding round to tournament...")
-        print(f"Current number of rounds: {len(self.rounds)}")
-        print(f"Number of rounds specified: {self.number_of_rounds}")
         if len(self.rounds) < self.number_of_rounds:
             self.rounds.append(round)
             self.current_round += 1
-            print("Round added successfully.")
         else:
-            raise ValueError(
-                "Cannot add more rounds than the number of rounds specified for the tournament."
-            )
+            raise ValueError("Cannot add more rounds than specified")
 
     def __str__(self):
         players_str = ", ".join(str(player) for player in self.players)
@@ -44,3 +36,16 @@ class Tournament:
             f"Players: {players_str}\n"
             f"Rounds:\n    {rounds_str}"
         )
+
+    def as_dict(self):
+        return {
+            "name": self.name,
+            "location": self.location,
+            "start_date": self.start_date.isoformat(),
+            "end_date": self.end_date.isoformat(),
+            "description": self.description,
+            "number_of_rounds": self.number_of_rounds,
+            "current_round": self.current_round,
+            "players": [player.as_dict() for player in self.players],
+            "rounds": [round.as_dict() for round in self.rounds]
+        }

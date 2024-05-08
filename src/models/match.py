@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 import random
-from models.player import Player
+from .player import Player
 
 
 @dataclass
@@ -32,3 +32,9 @@ class Match:
 
     def __str__(self):
         return f"Match: {self.players[0]} vs {self.players[1]}, Score: {self.score}"
+
+    def as_dict(self):
+        return {
+            "players": [player.as_dict() for player in self.players],
+            "score": self.score
+        }

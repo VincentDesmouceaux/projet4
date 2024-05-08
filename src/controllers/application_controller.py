@@ -1,34 +1,66 @@
-from controllers.menu_manager import MenuManager
-from controllers.tournament_manager import TournamentManager
+import json
+from pathlib import Path
+from controllers.report_manager import ReportManager
 from controllers.user_manager import UserManager
+from controllers.tournament_manager import TournamentManager
+from views.menu_view import display_welcome, display_main_menu, display_tournament_selection, display_report_menu, select_tournament
+
 
 class ApplicationController:
-    """
-    Contrôleur principal de l'application qui orchestre les interactions entre les menus,
-    la gestion des tournois, et la gestion des utilisateurs.
+    def __init__(self, filepath):
+        self.file_path = Path(filepath)
+        data = self.load_data()
+        self.user_manager = UserManager(filepath)
+        self.tournament_manager = TournamentManager(filepath)
+        self.report_manager = ReportManager(self.tournament_manager, self.user_manager, filepath)
 
-    Attributes:
-        menu_manager (MenuManager): Gère les interactions du menu principal.
-        tournament_manager (TournamentManager): Gère les opérations liées aux tournois.
-        user_manager (UserManager): Gère les informations relatives aux utilisateurs.
-    """
-    def __init__(self):
-        """Initialise les managers utilisés dans l'application."""
-        self.menu_manager = MenuManager()
-        self.tournament_manager = TournamentManager()
-        self.user_manager = UserManager()
+    def load_data(self):
+        if self.file_path.exists():
+            with self.file_path.open('r', encoding='utf-8') as file:
+                return json.load(file)
+        return {}
 
-    def run(self):
-        """
-        Lance le cycle principal de l'application où les commandes sont reçues et traitées.
-        """
+    def start(self):
+        start_action = display_welcome()
+        if start_action.lower() == "oui":
+            self.run_existing_tournament()
+        else:
+            self.main_menu_loop()
+
+    def run_existing_tournament(self):
+        tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
+        self.tournament_manager.run_tournament(tournament_name)
+
+    def main_menu_loop(self):
         while True:
-            action = self.menu_manager.display_main_menu()
-            if action == '1':
-                self.tournament_manager.handle_tournament_creation()
-            elif action == '2':
-                self.tournament_manager.list_tournaments()
-            elif action == 'exit':
-                break
+            choice = display_main_menu()
+            if choice == '1':
+                # Logique de création d'un nouveau tournoi (à implémenter)
+                pass
+            elif choice == '2':
+                self.report_menu_loop()
+            elif choice == '3':
+                break  # Quitter l'application
             else:
-                print("Invalid option, please try again.")
+                print("Option invalide, veuillez réessayer.")
+
+    def report_menu_loop(self):
+        while True:
+            choice = display_report_menu()
+            if choice == '1':
+                self.report_manager.list_all_players()
+            elif choice == '2':
+                self.report_manager.list_all_tournaments()
+            elif choice == '3':
+                tournament_name = select_tournament(self.report_manager.get_tournament_names())
+                self.report_manager.show_tournament_details(tournament_name)
+            elif choice == '4':
+                tournament_name = select_tournament(self.report_manager.get_tournament_names())
+                self.report_manager.list_tournament_players(tournament_name)
+            elif choice == '5':
+                tournament_name = select_tournament(self.report_manager.get_tournament_names())
+                self.report_manager.list_tournament_rounds_and_matches(tournament_name)
+            elif choice == '6':
+                break  # Retour au menu principal
+            else:
+                print("Option invalide, veuillez réessayer.")

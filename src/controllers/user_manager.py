@@ -1,40 +1,33 @@
+import json
+from pathlib import Path
 from models.player import Player
-from views.player_view import get_player_data, display_players, update_player_view
-from utils.file_handler import load_players, save_players
+
 
 class UserManager:
-    """
-    Gère les opérations liées aux joueurs dans le système.
+    def __init__(self, file_path):
+        self.file_path = Path(file_path)
+        self.players = []
 
-    Methods:
-        add_player(): Ajoute un nouveau joueur au système.
-        update_player(): Met à jour les informations d'un joueur existant.
-        list_players(): Affiche tous les joueurs enregistrés.
-    """
+    def load_players(self, players_data):
+        self.players = [Player(**data) for data in players_data]
 
-    def __init__(self):
-        """Charge les joueurs existants à partir du fichier de données."""
-        self.players = load_players()
+    def save_players(self):
+        with self.file_path.open('w', encoding='utf-8') as file:
+            json.dump([player.as_dict() for player in self.players], file, indent=4, ensure_ascii=False)
 
-    def add_player(self):
-        """Demande les données du joueur et l'ajoute à la liste des joueurs."""
-        player_data = get_player_data()
+    def add_player(self, player_data):
         new_player = Player(**player_data)
         self.players.append(new_player)
-        save_players(self.players)
-        print("Player added successfully!")
+        self.save_players()
+        return "Player added successfully!"
 
-    def update_player(self):
-        """Affiche les joueurs et permet à l'utilisateur de choisir un pour mise à jour."""
-        display_players(self.players)
-        player_id, updated_data = update_player_view()
+    def update_player(self, player_id, updated_data):
         for player in self.players:
             if player.chess_id == player_id:
                 player.update(**updated_data)
-                save_players(self.players)
-                print(f"Player {player_id} updated successfully!")
-                break
+                self.save_players()
+                return f"Player {player_id} updated successfully!"
+        return "Player ID not found."
 
-    def list_players(self):
-        """Affiche tous les joueurs enregistrés."""
-        display_players(self.players)
+    def get_all_players(self):
+        return self.players

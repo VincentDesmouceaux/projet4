@@ -1,36 +1,59 @@
-def display_main_menu():
-    """
-    Affiche le menu principal de l'application et récupère le choix de l'utilisateur.
-
-    Returns:
-        str: Le choix de l'utilisateur sous forme de chaîne de caractères.
-    """
-    print("\nMain Menu:")
-    print("1. Create Tournament")
-    print("2. List Tournaments")
-    print("3. Exit")
-    return input("Choose an option: ")
-
 def display_welcome():
-    """
-    Affiche un message de bienvenue et demande si l'utilisateur veut lancer un tournoi existant.
+    print("Bonjour ! Bienvenue dans le Logiciel de tournoi d’échecs !\n")
+    return input("Voulez-vous lancer un tournoi existant ? (Oui/Non) : ")
 
-    Returns:
-        str: La réponse de l'utilisateur ('oui' ou 'non').
-    """
-    return input("Que voulez-vous faire ?\n1. Lancer un tournois existant ? (Oui/Non): ")
 
-def display_tournament_selection(tournament_names):
-    """
-    Affiche la liste des tournois disponibles et permet à l'utilisateur de sélectionner un.
+def display_main_menu():
+    print("\nQue voulez-vous faire ?")
+    print("1. Créer un nouveau tournoi")
+    print("2. Consulter les rapports")
+    print("3. Quitter")
+    return input("\nEntrez votre choix : ")
 
-    Args:
-        tournament_names (list of str): Liste des noms des tournois disponibles.
 
-    Returns:
-        str: Le nom du tournoi sélectionné par l'utilisateur.
-    """
+def display_tournament_selection(tournaments):
     print("Sélectionnez un tournoi parmi les suivants:")
-    for name in tournament_names:
-        print(name)
-    return input("Entrez le nom du tournoi à lancer: ")
+    print("\n")
+    for index, tournament in enumerate(tournaments, start=1):
+        print(f"{index}. {tournament}")
+
+    selection = input("\nEntrez le numéro du tournoi à lancer : ")
+    try:
+        selected_index = int(selection) - 1
+        if 0 <= selected_index < len(tournaments):
+            return tournaments[selected_index]
+        else:
+            print("\nNuméro invalide, veuillez réessayer.\n")
+            return display_tournament_selection(tournaments)
+    except ValueError:
+        print("\nVeuillez entrer un nombre valide.\n")
+        return display_tournament_selection(tournaments)
+
+
+def display_report_menu():
+    print("\nQue voulez-vous faire ?")
+    print("1. Liste de tous les joueurs par ordre alphabétique")
+    print("2. Liste de tous les tournois")
+    print("3. Nom et dates d’un tournoi donné")
+    print("4. Liste des joueurs du tournoi par ordre alphabétique")
+    print("5. Liste de tous les tours du tournoi et de tous les matchs du tour")
+    print("6. Retourner au menu principal")
+    return input("\nEntrez votre choix : ")
+
+
+def select_tournament(tournaments):
+    print("Sélectionnez un tournoi parmi les suivants:")
+    for index, tournament in enumerate(tournaments, start=1):
+        print(f"{index}. {tournament}")
+
+    selection = input("\nEntrez le numéro du tournoi : ")
+    try:
+        selected_index = int(selection) - 1
+        if 0 <= selected_index < len(tournaments):
+            return tournaments[selected_index]
+        else:
+            print("\nNuméro invalide, veuillez réessayer.\n")
+            return select_tournament(tournaments)
+    except ValueError:
+        print("\nVeuillez entrer un nombre valide.\n")
+        return select_tournament(tournaments)
