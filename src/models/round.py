@@ -1,10 +1,5 @@
 """
 Module pour la gestion des rounds dans un tournoi d'échecs.
-
-Ce module contient la classe Round qui représente un round dans un tournoi
-d'échecs. La classe permet de gérer le démarrage et la fin d'un round, 
-d'ajouter des matchs et de convertir un round en dictionnaire ou de créer un
-round à partir d'un dictionnaire.
 """
 
 from dataclasses import dataclass, field

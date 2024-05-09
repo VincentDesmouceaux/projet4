@@ -32,7 +32,6 @@ class ApplicationController:
             filepath (str): Le chemin du fichier de données JSON.
         """
         self.file_path = Path(filepath)
-        data = self.load_data()
         self.user_manager = UserManager(filepath)
         self.tournament_manager = TournamentManager(filepath)
         self.report_manager = ReportManager(self.tournament_manager, self.user_manager)

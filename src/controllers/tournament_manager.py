@@ -12,7 +12,6 @@ from models.player import Player
 from models.round import Round
 from models.match import Match
 from views.tournament_view import display_tournament_details, display_final_scores, display_round_details
-from datetime import datetime
 
 
 class TournamentManager:

@@ -1,9 +1,6 @@
 """
 Module de vue pour afficher les informations des joueurs et des tournois.
 
-Ce module contient des fonctions pour afficher tous les joueurs par ordre alphabétique, 
-tous les tournois, les détails d'un tournoi spécifique, les joueurs d'un tournoi par ordre 
-alphabétique et les tours et matchs d'un tournoi.
 """
 
 

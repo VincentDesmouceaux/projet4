@@ -6,7 +6,6 @@ des rapports pour les tournois et les joueurs.
 """
 
 import json
-from pathlib import Path
 from views.report_view import (
     display_all_tournaments,
     display_tournament_details,
@@ -14,7 +13,6 @@ from views.report_view import (
     display_tournament_players_alphabetically,
     display_tournament_rounds_and_matches
 )
-from models.player import Player
 from controllers.export_manager import ExportManager
 
 

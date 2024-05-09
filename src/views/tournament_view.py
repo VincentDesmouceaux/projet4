@@ -1,8 +1,6 @@
 """
 Module de vue pour afficher les informations des tournois, des tours et des scores.
 
-Ce module contient des fonctions pour afficher les détails d'un tournoi, les détails d'un tour spécifique, 
-les scores finaux d'un tournoi et pour obtenir les informations nécessaires à la création d'un nouveau tournoi.
 """
 
 

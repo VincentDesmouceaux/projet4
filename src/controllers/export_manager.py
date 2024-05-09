@@ -13,9 +13,6 @@ from pathlib import Path
 class ExportManager:
     """
     Classe responsable de l'exportation des rapports.
-
-    Cette classe gère l'exportation des rapports au format texte et HTML, 
-    en les sauvegardant dans un répertoire spécifié.
     """
 
     def __init__(self, export_dir='src/rapports'):
