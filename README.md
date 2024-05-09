@@ -9,13 +9,14 @@ Bienvenue dans le Gestionnaire de Tournoi d'Échecs, une application complète c
 - [Introduction](#introduction)
 - [Fonctionnalités](#fonctionnalités)
 - [Installation](#installation)
+- [Exécuter le Programme et Générer un Rapport flake8](#exécuter-le-programme-et-générer-un-rapport-flake8)
 - [Utilisation](#utilisation)
   - [Créer un Nouveau Tournoi](#créer-un-nouveau-tournoi)
   - [Lancer un Tournoi Existant](#lancer-un-tournoi-existant)
   - [Générer des Rapports](#générer-des-rapports)
 - [Structure des Fichiers](#structure-des-fichiers)
 - [Contribution](#contribution)
-- [Licence](#licence)
+
 
 ---
 
@@ -47,6 +48,7 @@ Le Gestionnaire de Tournoi d'Échecs est conçu pour aider les organisateurs à 
    
    git clone https://github.com/VincentDesmouceaux/projet4.git
    cd projet4
+
 2. **Créer un Environnement Virtuel**
    
    python3 -m venv venv
@@ -56,15 +58,42 @@ Le Gestionnaire de Tournoi d'Échecs est conçu pour aider les organisateurs à 
    
    pip install -r requirements.txt
 
+## 🐍 Exécuter le Programme et Générer un Rapport flake8
+
+### Exécution du Programme
+
+1. **Activez votre environnement virtuel**
+
+    source venv/bin/activate   # Sur Windows: venv\Scripts\activate
+
+2. **Exécutez l'application**
+
+    python src/main.py
+
+### Générer un Rapport flake8
+
+    flake8 est un outil pour vérifier le style de votre code Python. Voici comment l'utiliser pour générer un rapport :
+
+1. **Installez flake8 (si ce n'est pas déjà fait)**
+
+    pip install flake8
+
+2. **Exécutez flake8 pour analyser votre code et générer un rapport**
+
+
+    flake8 --format=html --htmldir=flake8_report
+
+    Cela générera un rapport HTML dans le répertoire flake8_report. Vous pouvez ouvrir le fichier index.html dans ce répertoire pour voir les résultats de l'analyse de style.   
+
 ## 📖 Utilisation
 
 ### Créer un Nouveau Tournoi
 
-1. Exécutez l'application :
+1. **Exécutez l'application**
    
    python src/main.py
 
-2. Suivez les instructions à l'écran :
+2. **Suivez les instructions à l'écran**
 
     Sélectionnez "Créer un Nouveau Tournoi".
     Entrez les détails du tournoi : nom, lieu, dates de début et de fin, nombre de tours, et description.
@@ -72,22 +101,22 @@ Le Gestionnaire de Tournoi d'Échecs est conçu pour aider les organisateurs à 
 
 ### Lancer un Tournoi Existant
 
-1. Exécutez l'application :
+1. **Exécutez l'application**
 
     python src/main.py
 
-2. Sélectionnez "Lancer un Tournoi Existant".
+2. **Sélectionnez "Lancer un Tournoi Existant"**
 
     Choisissez le tournoi que vous souhaitez lancer dans la liste.
     L'application simulera les tours et les matchs, affichant les résultats.
 
 ### Générer des Rapports
 
-1. Exécutez l'application :
+1. **Exécutez l'application**
 
     python src/main.py
 
-2. Sélectionnez "Consulter les Rapports".
+2. **Sélectionnez "Consulter les Rapports"**
 
     Choisissez le type de rapport que vous souhaitez générer.
     Optionnellement, exportez le rapport en format texte ou HTML.
