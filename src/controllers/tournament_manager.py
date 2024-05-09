@@ -163,6 +163,8 @@ class TournamentManager:
             tournament_data (dict): Les données du nouveau tournoi.
         """
         players = [Player(**player_data) for player_data in tournament_data['players']]
+        for player in players:
+            player.score = 0.0  # Initialisation des scores à 0
         tournament_data['players'] = players
         new_tournament = Tournament(**tournament_data)
         self.tournaments.append(new_tournament)

@@ -41,10 +41,8 @@ def display_round_details(round):
     for match in round.matches:
         player1 = match.players[0]
         player2 = match.players[1]
-        score1 = match.score[0]
-        score2 = match.score[1]
-        print(f"{player1.first_name} {player1.last_name}[{player1.score}] vs {player2.first_name} {
-              player2.last_name}[{player2.score}] - Score: ({score1}, {score2})")
+        print(f"{player1.first_name} {player1.last_name} vs {
+              player2.first_name} {player2.last_name} - Score: {match.score}")
     print("-" * 40 + "\n")
 
 
