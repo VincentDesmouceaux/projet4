@@ -38,10 +38,13 @@ def display_round_details(round):
     print(f"Commencé à: {round.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Terminé à: {round.end_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print("-" * 40)
-    # Afficher les détails de chaque match dans le tour
     for match in round.matches:
-        print(f"{match.players[0].first_name} {match.players[0].last_name} vs {
-              match.players[1].first_name} {match.players[1].last_name} - Score: {match.score}")
+        player1 = match.players[0]
+        player2 = match.players[1]
+        score1 = match.score[0]
+        score2 = match.score[1]
+        print(f"{player1.first_name} {player1.last_name}[{player1.score}] vs {player2.first_name} {
+              player2.last_name}[{player2.score}] - Score: ({score1}, {score2})")
     print("-" * 40 + "\n")
 
 
