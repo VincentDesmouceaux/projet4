@@ -38,7 +38,7 @@ class UserManager:
             players_data (list): Liste des données des joueurs.
         """
         self.players = [data if isinstance(data, Player) else Player.from_dict(data) for data in players_data]
-        print(f"Loaded {len(self.players)} players.")
+        # print(f"Loaded {len(self.players)} players.")
 
     def save_players(self):
         """

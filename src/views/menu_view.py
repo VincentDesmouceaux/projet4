@@ -27,7 +27,8 @@ def display_main_menu():
     print("\n\033[1m\033[4mQue voulez-vous faire ?\033[0m\n")
     print("1. Créer un nouveau tournoi\n")
     print("2. Consulter les rapports\n")
-    print("3. Quitter\n")
+    print("3. Réinitialiser un tournoi\n")
+    print("4. Quitter\n")
     return input("Entrez votre choix : ")
 
 

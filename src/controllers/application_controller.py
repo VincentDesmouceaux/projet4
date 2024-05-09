@@ -71,9 +71,6 @@ class ApplicationController:
             self.main_menu_loop()
 
     def main_menu_loop(self):
-        """
-        Affiche et gère le menu principal de l'application.
-        """
         while True:
             choice = display_main_menu()
             if choice == '1':
@@ -81,6 +78,8 @@ class ApplicationController:
             elif choice == '2':
                 self.report_menu_loop()
             elif choice == '3':
+                self.reset_tournament()
+            elif choice == '4':
                 break  # Quitter l'application
             else:
                 print("Option invalide, veuillez réessayer.")
@@ -128,3 +127,10 @@ class ApplicationController:
                 break  # Retourner au menu principal
             else:
                 print("Option invalide, veuillez réessayer.")
+
+    def reset_tournament(self):
+        tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
+        if tournament_name:
+            self.tournament_manager.reset_tournament(tournament_name)
+        else:
+            print("Aucun tournoi sélectionné pour réinitialisation.")

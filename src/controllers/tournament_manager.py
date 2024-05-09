@@ -61,7 +61,7 @@ class TournamentManager:
         with self.filepath.open("w", encoding="utf-8") as file:
             json.dump({"tournaments": [self.serialize_tournament(t)
                                        for t in self.tournaments]}, file, indent=4, ensure_ascii=False)
-        print(f"Saved {len(self.tournaments)} tournaments.")
+        # print(f"Saved {len(self.tournaments)} tournaments.")
 
     def serialize_tournament(self, tournament):
         """
@@ -168,3 +168,18 @@ class TournamentManager:
         self.tournaments.append(new_tournament)
         self.save_tournaments()
         print(f"\n\033[1m\033[32mTournoi {new_tournament.name} ajouté avec succès.\033[0m\n")
+
+    def reset_tournament(self, tournament_name):
+        """
+        Réinitialise les scores et les rounds d'un tournoi donné.
+
+        Args:
+            tournament_name (str): Le nom du tournoi à réinitialiser.
+        """
+        tournament = self.get_tournament_details(tournament_name)
+        tournament.current_round = 0
+        tournament.rounds = []
+        for player in tournament.players:
+            player.score = 0.0
+        self.save_tournaments()
+        print(f"Tournoi {tournament_name} réinitialisé avec succès.")
