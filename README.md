@@ -61,7 +61,7 @@ Le Gestionnaire de Tournoi d'Échecs est conçu pour aider les organisateurs à 
 ### Créer un Nouveau Tournoi
 
 1. Exécutez l'application :
-   ```sh
+   
    python src/main.py
 
 2. Suivez les instructions à l'écran :
