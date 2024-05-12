@@ -68,7 +68,7 @@ class ReportManager:
         Affiche la liste de tous les tournois et propose d'exporter le rapport.
         """
         tournaments = self.tournament_manager.get_all_tournaments()
-        display_all_tournaments(tournaments)
+        display_all_tournaments(tournaments, styled=True)
         self.ask_to_export_report("all_tournaments", display_all_tournaments, tournaments)
 
     def list_all_players(self):
@@ -76,7 +76,7 @@ class ReportManager:
         Affiche la liste de tous les joueurs par ordre alphabétique et propose d'exporter le rapport.
         """
         players = self.user_manager.get_all_players()
-        display_all_players_alphabetically(players)
+        display_all_players_alphabetically(players, styled=True)
         self.ask_to_export_report("all_players", display_all_players_alphabetically, players)
 
     def show_tournament_details(self, tournament_name):
@@ -87,7 +87,7 @@ class ReportManager:
             tournament_name (str): Le nom du tournoi.
         """
         tournament = self.tournament_manager.get_tournament_details(tournament_name)
-        display_tournament_details(tournament)
+        display_tournament_details(tournament, styled=True)
         self.ask_to_export_report(f"tournament_details_{tournament_name}", display_tournament_details, tournament)
 
     def get_tournament_names(self):
@@ -107,7 +107,7 @@ class ReportManager:
             tournament_name (str): Le nom du tournoi.
         """
         tournament = self.tournament_manager.get_tournament_details(tournament_name)
-        display_tournament_players_alphabetically(tournament)
+        display_tournament_players_alphabetically(tournament, styled=True)
         self.ask_to_export_report(f"tournament_players_{tournament_name}",
                                   display_tournament_players_alphabetically, tournament)
 
@@ -119,7 +119,7 @@ class ReportManager:
             tournament_name (str): Le nom du tournoi.
         """
         tournament = self.tournament_manager.get_tournament_details(tournament_name)
-        display_tournament_rounds_and_matches(tournament)
+        display_tournament_rounds_and_matches(tournament, styled=True)
         self.ask_to_export_report(f"tournament_rounds_{tournament_name}",
                                   display_tournament_rounds_and_matches, tournament)
 

@@ -39,7 +39,7 @@ class ExportManager:
             # Redirige la sortie standard vers le fichier pour capturer le rapport
             original_stdout = sys.stdout
             sys.stdout = file
-            display_function(data)
+            display_function(data, styled=False)  # Désactiver le style pour les rapports texte
             sys.stdout = original_stdout
         print(f"Rapport sauvegardé sous {report_path}")
 
@@ -58,7 +58,7 @@ class ExportManager:
         captured_output = StringIO()
         original_stdout = sys.stdout
         sys.stdout = captured_output
-        display_function(data)
+        display_function(data, styled=False)  # Désactiver le style pour les rapports HTML
         sys.stdout = original_stdout
         report_content = captured_output.getvalue()
 

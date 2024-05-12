@@ -1,38 +1,43 @@
 """
 Module de vue pour afficher les informations des tournois, des tours et des scores.
-
 """
 
 
-def display_tournament_details(tournament):
+def display_tournament_details(tournament, styled=True):
     """
     Affiche les détails d'un tournoi spécifique.
 
     Args:
         tournament (Tournament): Un objet Tournament.
+        styled (bool): Indique si le texte doit être stylisé pour le terminal.
     """
+    bold_start, bold_end = ("\033[1m", "\033[0m") if styled else ("", "")
+
     print("\n" + "=" * 40)
-    print(f"\033[1mNom du Tournoi:\033[0m {tournament.name}")
-    print(f"\033[1mLieu:\033[0m {tournament.location}")
-    print(f"\033[1mDates:\033[0m Du {tournament.start_date} au {tournament.end_date}")
-    print(f"\033[1mNombre de tours prévus:\033[0m {tournament.number_of_rounds}")
-    print(f"\033[1mDescription:\033[0m {tournament.description}")
-    print("\033[1mListe des joueurs:\033[0m")
+    print(f"{bold_start}Nom du Tournoi:{bold_end} {tournament.name}")
+    print(f"{bold_start}Lieu:{bold_end} {tournament.location}")
+    print(f"{bold_start}Dates:{bold_end} Du {tournament.start_date} au {tournament.end_date}")
+    print(f"{bold_start}Nombre de tours prévus:{bold_end} {tournament.number_of_rounds}")
+    print(f"{bold_start}Description:{bold_end} {tournament.description}")
+    print(f"{bold_start}Liste des joueurs:{bold_end}")
     # Trier les joueurs par prénom et nom de famille
     for player in sorted(tournament.players, key=lambda x: (x.first_name, x.last_name)):
         print(f"- {player.first_name} {player.last_name}")
     print("=" * 40 + "\n")
 
 
-def display_round_details(round):
+def display_round_details(round, styled=True):
     """
     Affiche les détails d'un tour spécifique.
 
     Args:
         round (Round): Un objet Round.
+        styled (bool): Indique si le texte doit être stylisé pour le terminal.
     """
+    bold_start, bold_end = ("\033[1m", "\033[0m") if styled else ("", "")
+
     print("\n" + "=" * 40)
-    print(f"\033[1m-- {round.name} --\033[0m")
+    print(f"{bold_start}-- {round.name} --{bold_end}")
     print(f"Commencé à: {round.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Terminé à: {round.end_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print("-" * 40)
@@ -44,15 +49,18 @@ def display_round_details(round):
     print("-" * 40 + "\n")
 
 
-def display_final_scores(tournament):
+def display_final_scores(tournament, styled=True):
     """
     Affiche les scores finaux d'un tournoi.
 
     Args:
         tournament (Tournament): Un objet Tournament.
+        styled (bool): Indique si le texte doit être stylisé pour le terminal.
     """
+    bold_start, bold_end = ("\033[1m", "\033[0m") if styled else ("", "")
+
     print("\n" + "=" * 40)
-    print("\033[1m=== Résultats Finaux ===\033[0m")
+    print(f"{bold_start}=== Résultats Finaux ==={bold_end}")
     # Trier les joueurs par score décroissant
     final_scores = sorted(tournament.players, key=lambda p: p.score, reverse=True)
     for player in final_scores:
