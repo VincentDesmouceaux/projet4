@@ -52,7 +52,11 @@ Le Gestionnaire de Tournoi d'Échecs est conçu pour aider les organisateurs à 
 2. **Créer un Environnement Virtuel**
    
    python3 -m venv venv
-   source venv/bin/activate   # Sur Windows: venv\Scripts\activate
+   source venv/bin/activate   
+   
+   #Sur Windows: 
+   python -m venv venv
+   venv\Scripts\activate
 
 3. **Installer les Dépendances**
    
