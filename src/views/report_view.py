@@ -1,3 +1,8 @@
+"""
+Module de vue pour afficher les rapports des tournois et des joueurs.
+"""
+
+
 def display_all_players_alphabetically(players, styled=True):
     """
     Affiche la liste de tous les joueurs par ordre alphabétique.
@@ -53,7 +58,6 @@ def display_tournament_details(tournament, styled=True):
     print(f"{bold_start}Nombre de tours prévus:{bold_end} {tournament.number_of_rounds}")
     print(f"{bold_start}Description:{bold_end} {tournament.description}")
     print(f"{bold_start}Liste des joueurs:{bold_end}")
-    # Trier les joueurs par prénom et nom de famille
     for player in sorted(tournament.players, key=lambda x: (x.first_name, x.last_name)):
         print(f"- {player.first_name} {player.last_name}")
     print("=" * 40 + "\n")

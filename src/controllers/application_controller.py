@@ -12,7 +12,7 @@ from controllers.report_manager import ReportManager
 from controllers.user_manager import UserManager
 from controllers.tournament_manager import TournamentManager
 from views.menu_view import display_welcome, display_main_menu, display_tournament_selection, display_report_menu
-from views.tournament_view import get_tournament_data
+from views.tournament_view import display_tournament_details, display_round_details, display_final_scores, get_tournament_data
 from views.player_view import get_player_data
 
 
@@ -64,7 +64,9 @@ class ApplicationController:
         Lance un tournoi existant sélectionné par l'utilisateur.
         """
         tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
-        if tournament_name is not None:
+        if tournament_name == "resume":
+            self.resume_tournament()
+        elif tournament_name is not None:
             self.tournament_manager.run_tournament(tournament_name)
         else:
             self.main_menu_loop()
@@ -133,3 +135,18 @@ class ApplicationController:
             self.tournament_manager.reset_tournament(tournament_name)
         else:
             print("Aucun tournoi sélectionné pour réinitialisation.")
+
+    def resume_tournament(self):
+        """
+        Reprend un tournoi en pause.
+        """
+        paused_tournaments = self.tournament_manager.get_paused_tournaments()
+        if not paused_tournaments:
+            print("Aucun tournoi en pause disponible.")
+            return
+
+        tournament_name = display_tournament_selection(paused_tournaments)
+        if tournament_name:
+            self.tournament_manager.run_tournament(tournament_name)
+        else:
+            self.main_menu_loop()

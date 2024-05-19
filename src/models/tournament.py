@@ -15,20 +15,6 @@ from .player import Player
 
 @dataclass
 class Tournament:
-    """
-    Classe représentant un tournoi d'échecs.
-
-    Attributes:
-        name (str): Le nom du tournoi.
-        location (str): Le lieu du tournoi.
-        start_date (datetime.date): La date de début du tournoi.
-        end_date (datetime.date): La date de fin du tournoi.
-        description (str): La description du tournoi.
-        number_of_rounds (int): Le nombre de tours prévus pour le tournoi.
-        rounds (List[Round]): La liste des rounds dans ce tournoi.
-        players (List[Player]): La liste des joueurs participant au tournoi.
-        current_round (int): Le tour actuel du tournoi.
-    """
     name: str
     location: str
     start_date: datetime.date
@@ -40,24 +26,9 @@ class Tournament:
     current_round: int = 0
 
     def add_player(self, player: Player):
-        """
-        Ajoute un joueur au tournoi.
-
-        Args:
-            player (Player): Le joueur à ajouter.
-        """
         self.players.append(player)
 
     def add_round(self, round: Round):
-        """
-        Ajoute un round au tournoi et incrémente le tour actuel.
-
-        Args:
-            round (Round): Le round à ajouter.
-
-        Raises:
-            ValueError: Si le nombre de rounds dépasse le nombre de tours spécifié.
-        """
         if len(self.rounds) < self.number_of_rounds:
             self.rounds.append(round)
             self.current_round += 1
@@ -65,12 +36,6 @@ class Tournament:
             raise ValueError("Cannot add more rounds than specified")
 
     def __str__(self):
-        """
-        Retourne une représentation en chaîne de caractères du tournoi.
-
-        Returns:
-            str: Représentation du tournoi sous forme de chaîne de caractères.
-        """
         players_str = ", ".join(str(player) for player in self.players)
         rounds_str = "\n".join(str(round) for round in self.rounds)
         return (
@@ -81,12 +46,6 @@ class Tournament:
         )
 
     def as_dict(self):
-        """
-        Convertit le tournoi en un dictionnaire.
-
-        Returns:
-            dict: Dictionnaire représentant le tournoi avec ses détails.
-        """
         return {
             "name": self.name,
             "location": self.location,
@@ -101,19 +60,10 @@ class Tournament:
 
     @classmethod
     def from_dict(cls, data):
-        """
-        Crée une instance de Tournament à partir d'un dictionnaire.
-
-        Args:
-            data (dict): Dictionnaire contenant les données du tournoi.
-
-        Returns:
-            Tournament: Instance de Tournament créée à partir des données fournies.
-        """
         start_date = datetime.datetime.strptime(data["start_date"], "%Y-%m-%d").date()
         end_date = datetime.datetime.strptime(data["end_date"], "%Y-%m-%d").date()
         players = [Player.from_dict(p_data) for p_data in data["players"]]
-        rounds = [Round.from_dict(r_data) for r_data in data.get("rounds", [])]  # Gérer l'absence de clé 'rounds'
+        rounds = [Round.from_dict(r_data) for r_data in data.get("rounds", [])]
         return cls(
             name=data["name"],
             location=data["location"],
@@ -125,3 +75,13 @@ class Tournament:
             players=players,
             rounds=rounds
         )
+
+    def check_if_players_played(self, player1, player2):
+        """
+        Vérifie si deux joueurs se sont déjà affrontés dans ce tournoi.
+        """
+        for round in self.rounds:
+            for match in round.matches:
+                if (player1 in match.players) and (player2 in match.players):
+                    return True
+        return False

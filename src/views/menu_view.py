@@ -40,21 +40,22 @@ def display_tournament_selection(tournaments):
         tournaments (list): La liste des tournois disponibles.
 
     Returns:
-        str: Le nom du tournoi sélectionné par l'utilisateur ou None s'il a choisi de retourner au menu principal.
+        str: Le nom du tournoi sélectionné par l'utilisateur ou une option spéciale.
     """
     print("\n\033[1m\033[4mSélectionnez un tournoi parmi les suivants:\033[0m\n")
     for index, tournament in enumerate(tournaments, start=1):
         print(f"{index}. {tournament}\n")
-    print(f"{len(tournaments) + 1}. Retour\n")
+    print(f"{len(tournaments) + 1}. Reprendre un tournoi en pause\n")
+    print(f"{len(tournaments) + 2}. Retour\n")
 
     selection = input("Entrez le numéro du tournoi à lancer : ")
     try:
         selected_index = int(selection) - 1
         if 0 <= selected_index < len(tournaments):
-            # Retourne le tournoi sélectionné
             return tournaments[selected_index]
         elif selected_index == len(tournaments):
-            # Retourne au menu principal
+            return "resume"
+        elif selected_index == len(tournaments) + 1:
             return None
         else:
             print("\n\033[31mNuméro invalide, veuillez réessayer.\033[0m\n")

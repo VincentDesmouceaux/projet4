@@ -10,49 +10,35 @@ from .match import Match
 
 @dataclass
 class Round:
-    """
-    Classe représentant un round dans un tournoi d'échecs.
-
-    Attributes:
-        name (str): Le nom du round.
-        matches (List[Match]): La liste des matchs dans ce round.
-        start_time (datetime.datetime): L'heure de début du round.
-        end_time (datetime.datetime): L'heure de fin du round.
-    """
     name: str
     matches: List[Match] = field(default_factory=list)
     start_time: datetime.datetime = None
     end_time: datetime.datetime = None
 
-    def start_round(self):
-        """
-        Démarre le round en définissant l'heure de début à l'heure actuelle.
-        """
-        self.start_time = datetime.datetime.now()
+    def start_round(self, resume=False):
+        if not resume:
+            self.start_time = datetime.datetime.now()
 
     def end_round(self):
-        """
-        Termine le round en définissant l'heure de fin à l'heure actuelle.
-        """
         self.end_time = datetime.datetime.now()
 
     def add_match(self, match: Match):
-        """
-        Ajoute un match au round et joue le match.
-
-        Args:
-            match (Match): Le match à ajouter au round.
-        """
         self.matches.append(match)
-        match.play_match()
+
+    def enter_scores(self, tournament_manager):
+        """
+        Permet à l'utilisateur de saisir les scores pour chaque match du round.
+        """
+        for match in self.matches:
+            if match.score == (0.0, 0.0):  # Si le match n'a pas encore de score
+                choice = display_match_result(match)
+                if choice == 4:
+                    tournament_manager.save_tournaments()
+                    print("Tournoi mis en pause et sauvegardé. À bientôt!")
+                    exit(0)
+                match.enter_score(choice)
 
     def __str__(self):
-        """
-        Retourne une représentation en chaîne de caractères du round.
-
-        Returns:
-            str: Représentation du round sous forme de chaîne de caractères.
-        """
         round_details = f"{self.name} - Start: {self.start_time}, End: {self.end_time}\n"
         if self.matches:
             for match in self.matches:
@@ -62,12 +48,6 @@ class Round:
         return round_details
 
     def as_dict(self):
-        """
-        Convertit le round en un dictionnaire.
-
-        Returns:
-            dict: Dictionnaire représentant le round avec ses détails.
-        """
         return {
             "name": self.name,
             "matches": [match.as_dict() for match in self.matches],
@@ -77,15 +57,6 @@ class Round:
 
     @classmethod
     def from_dict(cls, data):
-        """
-        Crée une instance de Round à partir d'un dictionnaire.
-
-        Args:
-            data (dict): Dictionnaire contenant les données du round.
-
-        Returns:
-            Round: Instance de Round créée à partir des données fournies.
-        """
         matches = [Match.from_dict(match_data) for match_data in data.get("matches", [])]
         start_time = datetime.datetime.fromisoformat(data["start_time"]) if data["start_time"] else None
         end_time = datetime.datetime.fromisoformat(data["end_time"]) if data["end_time"] else None
