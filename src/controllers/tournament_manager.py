@@ -103,3 +103,6 @@ class TournamentManager:
                 player.score = 0.0
         self.save_tournaments()
         print("Tous les tournois ont été réinitialisés avec succès.")
+
+    def get_all_tournaments(self):
+        return self.tournaments

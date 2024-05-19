@@ -1,9 +1,9 @@
-import json
 from pathlib import Path
+import json
 from datetime import datetime
-from controllers.report_manager import ReportManager
-from controllers.user_manager import UserManager
 from controllers.tournament_manager import TournamentManager
+from controllers.user_manager import UserManager
+from controllers.report_manager import ReportManager
 from views.menu_view import display_welcome, display_main_menu, display_tournament_selection, display_report_menu
 from views.tournament_view import display_tournament_details, display_round_details, display_final_scores, get_tournament_data
 from views.player_view import get_player_data
@@ -93,13 +93,16 @@ class ApplicationController:
             elif choice == '2':
                 self.report_manager.list_all_tournaments()
             elif choice == '3':
-                tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
+                tournament_name = display_tournament_selection(
+                    self.report_manager.get_tournament_names(), include_paused=False)
                 self.report_manager.show_tournament_details(tournament_name)
             elif choice == '4':
-                tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
+                tournament_name = display_tournament_selection(
+                    self.report_manager.get_tournament_names(), include_paused=False)
                 self.report_manager.show_tournament_players_alphabetically(tournament_name)
             elif choice == '5':
-                tournament_name = display_tournament_selection(self.report_manager.get_tournament_names())
+                tournament_name = display_tournament_selection(
+                    self.report_manager.get_tournament_names(), include_paused=False)
                 self.report_manager.show_tournament_rounds_and_matches(tournament_name)
             elif choice == '6':
                 break  # Retourner au menu principal
