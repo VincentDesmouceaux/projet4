@@ -4,15 +4,7 @@ Module de vue pour afficher les informations des tournois, des tours et des scor
 
 
 def display_tournament_details(tournament, styled=True):
-    """
-    Affiche les détails d'un tournoi spécifique.
-
-    Args:
-        tournament (Tournament): Un objet Tournament.
-        styled (bool): Indique si le texte doit être stylisé pour le terminal.
-    """
     bold_start, bold_end = ("\033[1m", "\033[0m") if styled else ("", "")
-
     print("\n" + "=" * 40)
     print(f"{bold_start}Nom du Tournoi:{bold_end} {tournament.name}")
     print(f"{bold_start}Lieu:{bold_end} {tournament.location}")
@@ -74,14 +66,12 @@ def display_match_result(match, tournament_manager):
 
 def display_round_details(round, tournament_manager, current_match=None, styled=True):
     bold_start, bold_end = ("\033[1m", "\033[0m") if styled else ("", "")
-
     print("\n" + "=" * 40)
     print(f"{bold_start}-- {round.name} --{bold_end}")
     if round.start_time:
         print(f"Commencé à: {round.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     else:
         print("Commencé à: N/A")
-
     if round.end_time:
         print(f"Terminé à: {round.end_time.strftime('%Y-%m-%d %H:%M:%S')}")
     else:
@@ -104,15 +94,7 @@ def display_round_details(round, tournament_manager, current_match=None, styled=
 
 
 def display_final_scores(tournament, styled=True):
-    """
-    Affiche les scores finaux d'un tournoi.
-
-    Args:
-        tournament (Tournament): Un objet Tournament.
-        styled (bool): Indique si le texte doit être stylisé pour le terminal.
-    """
     bold_start, bold_end = ("\033[1m", "\033[0m") if styled else ("", "")
-
     print("\n" + "=" * 40)
     print(f"{bold_start}=== Résultats Finaux ==={bold_end}")
     final_scores = sorted(tournament.players, key=lambda p: p.score, reverse=True)

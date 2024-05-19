@@ -23,7 +23,6 @@ class Tournament:
     def add_round(self, round: Round):
         if len(self.rounds) < self.number_of_rounds:
             self.rounds.append(round)
-            self.current_round += 1
         else:
             raise ValueError("Cannot add more rounds than specified")
 
@@ -93,13 +92,3 @@ class Tournament:
             players=players,
             rounds=rounds
         )
-
-    def check_if_players_played(self, player1, player2):
-        """
-        Vérifie si deux joueurs se sont déjà affrontés dans ce tournoi.
-        """
-        for round in self.rounds:
-            for match in round.matches:
-                if (player1 in match.players) and (player2 in match.players):
-                    return True
-        return False
