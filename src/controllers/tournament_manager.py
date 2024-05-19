@@ -1,17 +1,11 @@
-"""
-Module pour la gestion des tournois.
-
-Ce module contient la classe TournamentManager qui permet de gérer les tournois,
-y compris leur chargement, sauvegarde, exécution et génération des matchs.
-"""
-
 import json
 from pathlib import Path
+from datetime import datetime
 from models.tournament import Tournament
 from models.player import Player
 from models.round import Round
 from models.match import Match
-from views.tournament_view import display_tournament_details, display_final_scores, display_round_details
+from views.tournament_view import display_tournament_details, display_round_details, display_final_scores
 
 
 class TournamentManager:
@@ -48,25 +42,52 @@ class TournamentManager:
             raise ValueError("No tournament found with the name specified.")
         return tournament
 
-    def run_tournament(self, tournament_name):
-        tournament = self.get_tournament_details(tournament_name)
-        display_tournament_details(tournament)
-        while tournament.current_round < tournament.number_of_rounds:
-            self.run_round(tournament)
-        display_final_scores(tournament)
-        self.save_tournaments()
-
-    def run_round(self, tournament):
-        round_name = f"Round {tournament.current_round + 1}"
+    def run_round(self, tournament, is_resumed):
+        current_round_index = tournament.current_round
+        round_name = f"Round {current_round_index + 1}"
         round = next((r for r in tournament.rounds if r.name == round_name), None)
+
         if not round:
             round = Round(name=round_name)
             self.generate_matches(tournament, round)
-            round.start_round()
+            round.start_round(resume=is_resumed)
             tournament.add_round(round)
-        display_round_details(round, self)
+            print(f"Started {round_name}, current_round now {tournament.current_round}")
+
+        current_match = round.get_current_match()
+        while current_match:
+            display_round_details(round, self, current_match=current_match)
+            current_match = round.get_current_match()
+            self.save_tournaments()  # Save the tournament state after each match
+
         if not round.end_time:
             round.end_round()
+            tournament.current_round += 1  # Increment current_round here
+            print(f"Round {round_name} ended, current_round now {tournament.current_round}")
+        self.save_tournaments()  # Save the tournament state after the round ends
+
+    def run_tournament(self, tournament_name, is_resumed=False):
+        tournament = self.get_tournament_details(tournament_name)
+        display_tournament_details(tournament)
+
+        # Si le tournoi est terminé, afficher les scores finaux et proposer une réinitialisation
+        if tournament.current_round >= tournament.number_of_rounds:
+            if display_final_scores(tournament):
+                self.reset_tournament(tournament_name)
+                print("\nLe tournoi a été réinitialisé. Vous pouvez recommencer.\n")
+            else:
+                return
+
+        # Reprendre le tournoi à partir du round en cours
+        while tournament.current_round < tournament.number_of_rounds:
+            self.run_round(tournament, is_resumed)
+            is_resumed = False
+
+            # Vérifier si le tournoi est terminé après le round courant
+            if tournament.current_round >= tournament.number_of_rounds:
+                break
+
+        display_final_scores(tournament)
         self.save_tournaments()
 
     def generate_matches(self, tournament, round):
@@ -98,8 +119,14 @@ class TournamentManager:
         self.save_tournaments()
         print(f"Tournoi {tournament_name} réinitialisé avec succès.")
 
+    def reset_all_tournaments(self):
+        for tournament in self.tournaments:
+            tournament.current_round = 0
+            tournament.rounds = []
+            for player in tournament.players:
+                player.score = 0.0
+        self.save_tournaments()
+        print("Tous les tournois ont été réinitialisés avec succès.")
+
     def get_paused_tournaments(self):
-        """
-        Retourne une liste de tournois en pause (non terminés).
-        """
         return [tournament.name for tournament in self.tournaments if tournament.current_round > 0 and tournament.current_round < tournament.number_of_rounds]

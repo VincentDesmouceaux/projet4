@@ -72,27 +72,34 @@ def display_match_result(match, tournament_manager):
     match.update_player_scores()
 
 
-def display_round_details(round, tournament_manager, styled=True):
-    """
-    Affiche les détails d'un tour spécifique.
-
-    Args:
-        round (Round): Un objet Round.
-        tournament_manager (TournamentManager): Le gestionnaire de tournois pour permettre la pause et la sauvegarde.
-        styled (bool): Indique si le texte doit être stylisé pour le terminal.
-    """
+def display_round_details(round, tournament_manager, current_match=None, styled=True):
     bold_start, bold_end = ("\033[1m", "\033[0m") if styled else ("", "")
 
     print("\n" + "=" * 40)
     print(f"{bold_start}-- {round.name} --{bold_end}")
-    print(f"Commencé à: {round.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    if round.start_time:
+        print(f"Commencé à: {round.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    else:
+        print("Commencé à: N/A")
+
     if round.end_time:
         print(f"Terminé à: {round.end_time.strftime('%Y-%m-%d %H:%M:%S')}")
     else:
         print("En cours")
     print("-" * 40)
+
     for match in round.matches:
-        display_match_result(match, tournament_manager)
+        player1 = match.players[0]
+        player2 = match.players[1]
+        if match == current_match:
+            display_match_result(match, tournament_manager)
+        elif match.score != (0.0, 0.0):
+            print(f"Match: {player1.first_name} {player1.last_name} vs {player2.first_name} {player2.last_name}")
+            print(f"Résultat: {match.score[0]} - {match.score[1]}")
+        else:
+            print(f"Match à venir: {player1.first_name} {player1.last_name} vs {
+                  player2.first_name} {player2.last_name}")
+
     print("-" * 40 + "\n")
 
 
@@ -112,6 +119,13 @@ def display_final_scores(tournament, styled=True):
     for player in final_scores:
         print(f"{player.first_name} {player.last_name}: {player.score} points")
     print("=" * 40 + "\n")
+
+    # Demander si l'utilisateur souhaite redémarrer le tournoi
+    restart_tournament_option = input("Souhaitez-vous redémarrer le tournoi ? (Oui/Non) : ").strip().lower()
+    if restart_tournament_option == "oui":
+        return True
+    else:
+        return False
 
 
 def get_tournament_data():

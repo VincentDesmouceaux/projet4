@@ -1,11 +1,3 @@
-"""
-Module pour la gestion des tournois d'échecs.
-
-Ce module contient la classe Tournament qui représente un tournoi d'échecs. La classe permet de gérer
-les joueurs, les rounds, et fournit des méthodes pour convertir un tournoi en dictionnaire ou créer
-un tournoi à partir d'un dictionnaire.
-"""
-
 from dataclasses import dataclass, field
 from typing import List
 import datetime
@@ -34,6 +26,32 @@ class Tournament:
             self.current_round += 1
         else:
             raise ValueError("Cannot add more rounds than specified")
+
+    def get_current_round(self):
+        """
+        Retourne le round en cours ou un nouveau round si tous les rounds sont terminés.
+        """
+        if not self.rounds:
+            return None
+
+        current_round = self.rounds[-1]
+        if current_round.is_completed():
+            if len(self.rounds) < self.number_of_rounds:
+                return None
+            else:
+                return current_round
+
+        return current_round
+
+    def get_current_match(self):
+        """
+        Retourne le match en cours ou None si tous les matchs sont terminés.
+        """
+        current_round = self.get_current_round()
+        if not current_round:
+            return None
+
+        return current_round.get_current_match()
 
     def __str__(self):
         players_str = ", ".join(str(player) for player in self.players)

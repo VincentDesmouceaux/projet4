@@ -1,7 +1,3 @@
-"""
-Module pour la gestion des rounds dans un tournoi d'échecs.
-"""
-
 from dataclasses import dataclass, field
 from typing import List
 import datetime
@@ -25,18 +21,23 @@ class Round:
     def add_match(self, match: Match):
         self.matches.append(match)
 
-    def enter_scores(self, tournament_manager):
+    def get_current_match(self):
         """
-        Permet à l'utilisateur de saisir les scores pour chaque match du round.
+        Retourne le premier match non complété du round.
         """
         for match in self.matches:
-            if match.score == (0.0, 0.0):  # Si le match n'a pas encore de score
-                choice = display_match_result(match)
-                if choice == 4:
-                    tournament_manager.save_tournaments()
-                    print("Tournoi mis en pause et sauvegardé. À bientôt!")
-                    exit(0)
-                match.enter_score(choice)
+            if match.score == (0.0, 0.0):
+                return match
+        return None
+
+    def has_started(self):
+        return self.start_time is not None
+
+    def is_completed(self):
+        """
+        Vérifie si tous les matchs du round ont été complétés.
+        """
+        return all(match.score != (0.0, 0.0) for match in self.matches)
 
     def __str__(self):
         round_details = f"{self.name} - Start: {self.start_time}, End: {self.end_time}\n"

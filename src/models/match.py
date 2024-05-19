@@ -1,10 +1,3 @@
-"""
-Module pour la gestion des matchs d'échecs.
-
-Ce module contient la classe Match qui représente un match entre deux joueurs,
-avec leurs scores respectifs.
-"""
-
 from dataclasses import dataclass, field
 from .player import Player
 
@@ -13,21 +6,6 @@ from .player import Player
 class Match:
     players: tuple
     score: tuple = field(default_factory=lambda: (0.0, 0.0))
-
-    def enter_score(self, choice):
-        """
-        Met à jour le score du match en fonction du choix de l'utilisateur.
-
-        Args:
-            choice (int): Le choix de l'utilisateur indiquant le résultat du match.
-        """
-        if choice == 1:
-            self.score = (0.5, 0.5)
-        elif choice == 2:
-            self.score = (1, 0)
-        elif choice == 3:
-            self.score = (0, 1)
-        self.update_player_scores()
 
     def update_player_scores(self):
         self.players[0].score += self.score[0]

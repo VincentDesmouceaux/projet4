@@ -18,12 +18,6 @@ def display_welcome():
 
 
 def display_main_menu():
-    """
-    Affiche le menu principal et demande à l'utilisateur de choisir une option.
-
-    Returns:
-        str: Le choix de l'utilisateur.
-    """
     print("\n\033[1m\033[4mQue voulez-vous faire ?\033[0m\n")
     print("1. Créer un nouveau tournoi\n")
     print("2. Consulter les rapports\n")
@@ -33,15 +27,6 @@ def display_main_menu():
 
 
 def display_tournament_selection(tournaments):
-    """
-    Affiche la liste des tournois disponibles et demande à l'utilisateur de sélectionner un tournoi.
-
-    Args:
-        tournaments (list): La liste des tournois disponibles.
-
-    Returns:
-        str: Le nom du tournoi sélectionné par l'utilisateur ou une option spéciale.
-    """
     print("\n\033[1m\033[4mSélectionnez un tournoi parmi les suivants:\033[0m\n")
     for index, tournament in enumerate(tournaments, start=1):
         print(f"{index}. {tournament}\n")
