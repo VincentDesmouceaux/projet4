@@ -30,9 +30,6 @@ def display_tournament_selection(tournaments, include_paused=True):
     print("\n\033[1m\033[4mSélectionnez un tournoi parmi les suivants:\033[0m\n")
     for index, tournament in enumerate(tournaments, start=1):
         print(f"{index}. {tournament}\n")
-    if include_paused:
-        print(f"{len(tournaments) + 1}. Reprendre un tournoi en pause\n")
-    print(f"{len(tournaments) + (2 if include_paused else 1)}. Retour\n")
 
     selection = input("Entrez le numéro du tournoi à lancer : ")
     try:

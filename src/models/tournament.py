@@ -7,6 +7,20 @@ from .player import Player
 
 @dataclass
 class Tournament:
+    """
+    Représente un tournoi d'échecs.
+
+    Attributes:
+        name (str): Le nom du tournoi.
+        location (str): Le lieu du tournoi.
+        start_date (datetime.date): La date de début du tournoi.
+        end_date (datetime.date): La date de fin du tournoi.
+        description (str): La description du tournoi.
+        number_of_rounds (int): Le nombre de tours dans le tournoi.
+        rounds (List[Round]): La liste des tours du tournoi.
+        players (List[Player]): La liste des joueurs du tournoi.
+        current_round (int): Le tour en cours.
+    """
     name: str
     location: str
     start_date: datetime.date
@@ -18,9 +32,24 @@ class Tournament:
     current_round: int = 0
 
     def add_player(self, player: Player):
+        """
+        Ajoute un joueur au tournoi.
+
+        Args:
+            player (Player): Le joueur à ajouter.
+        """
         self.players.append(player)
 
     def add_round(self, round: Round):
+        """
+        Ajoute un tour au tournoi.
+
+        Args:
+            round (Round): Le tour à ajouter.
+
+        Raises:
+            ValueError: Si le nombre de tours dépasse le nombre spécifié.
+        """
         if len(self.rounds) < self.number_of_rounds:
             self.rounds.append(round)
         else:
@@ -28,7 +57,10 @@ class Tournament:
 
     def get_current_round(self):
         """
-        Retourne le round en cours ou un nouveau round si tous les rounds sont terminés.
+        Retourne le tour en cours ou un nouveau tour si tous les tours sont terminés.
+
+        Returns:
+            Round: Le tour en cours ou None si tous les tours sont terminés.
         """
         if not self.rounds:
             return None
@@ -45,6 +77,9 @@ class Tournament:
     def get_current_match(self):
         """
         Retourne le match en cours ou None si tous les matchs sont terminés.
+
+        Returns:
+            Match: Le match en cours ou None si tous les matchs sont terminés.
         """
         current_round = self.get_current_round()
         if not current_round:
@@ -63,6 +98,12 @@ class Tournament:
         )
 
     def as_dict(self):
+        """
+        Convertit l'objet Tournament en dictionnaire.
+
+        Returns:
+            dict: Le dictionnaire représentant le tournoi.
+        """
         return {
             "name": self.name,
             "location": self.location,
@@ -77,6 +118,15 @@ class Tournament:
 
     @classmethod
     def from_dict(cls, data):
+        """
+        Crée un objet Tournament à partir d'un dictionnaire.
+
+        Args:
+            data (dict): Le dictionnaire contenant les données du tournoi.
+
+        Returns:
+            Tournament: L'objet Tournament créé.
+        """
         start_date = datetime.datetime.strptime(data["start_date"], "%Y-%m-%d").date()
         end_date = datetime.datetime.strptime(data["end_date"], "%Y-%m-%d").date()
         players = [Player.from_dict(p_data) for p_data in data["players"]]

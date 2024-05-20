@@ -49,10 +49,10 @@ def display_match_result(match, tournament_manager):
         print(f"{yellow_start}Égalité, chaque joueur remporte 0,5 point.{yellow_end}")
     elif choice == '2':
         match.score = (1, 0)
-        print(f"{green_start}{player1.first_name} {player1.last_name} a remporté la partie et gagne un point.{green_end}")
+        print(f"{green_start}{player1.first_name} {player1.last_name}  remporte la partie, gagne un point.{green_end}")
     elif choice == '3':
         match.score = (0, 1)
-        print(f"{green_start}{player2.first_name} {player2.last_name} a remporté la partie et gagne un point.{green_end}")
+        print(f"{green_start}{player2.first_name} {player2.last_name}  remporte la partie, gagne un point.{green_end}")
     elif choice == '4':
         tournament_manager.save_tournaments()
         print(f"{red_start}Tournoi mis en pause et sauvegardé. À bientôt!{red_end}")
@@ -101,13 +101,6 @@ def display_final_scores(tournament, styled=True):
     for player in final_scores:
         print(f"{player.first_name} {player.last_name}: {player.score} points")
     print("=" * 40 + "\n")
-
-    # Demander si l'utilisateur souhaite redémarrer le tournoi
-    restart_tournament_option = input("Souhaitez-vous redémarrer le tournoi ? (Oui/Non) : ").strip().lower()
-    if restart_tournament_option == "oui":
-        return True
-    else:
-        return False
 
 
 def get_tournament_data():
