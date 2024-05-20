@@ -1,0 +1,10 @@
+.DS_Store
+venv/
+env/
+.*
+__*
+
+!__init__.py
+rapports/
+data/
+
