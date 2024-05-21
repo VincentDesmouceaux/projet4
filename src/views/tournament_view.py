@@ -1,3 +1,6 @@
+import re
+from datetime import datetime
+
 """
 Module de vue pour afficher les informations des tournois, des tours et des scores.
 """
@@ -49,10 +52,10 @@ def display_match_result(match, tournament_manager):
         print(f"{yellow_start}Égalité, chaque joueur remporte 0,5 point.{yellow_end}")
     elif choice == '2':
         match.score = (1, 0)
-        print(f"{green_start}{player1.first_name} {player1.last_name}  remporte la partie, gagne un point.{green_end}")
+        print(f"{green_start}{player1.first_name} {player1.last_name} remporte la partie, gagne un point.{green_end}")
     elif choice == '3':
         match.score = (0, 1)
-        print(f"{green_start}{player2.first_name} {player2.last_name}  remporte la partie, gagne un point.{green_end}")
+        print(f"{green_start}{player2.first_name} {player2.last_name} remporte la partie, gagne un point.{green_end}")
     elif choice == '4':
         tournament_manager.save_tournaments()
         print(f"{red_start}Tournoi mis en pause et sauvegardé. À bientôt!{red_end}")
@@ -111,18 +114,46 @@ def get_tournament_data():
         dict: Un dictionnaire contenant les informations du tournoi.
     """
     print("\n\033[1m\033[4mEntrez les détails du tournoi:\033[0m\n")
-    name = input("Nom du tournoi: ")
-    location = input("Lieu: ")
-    start_date = input("Date de début (YYYY-MM-DD): ")
-    end_date = input("Date de fin (YYYY-MM-DD): ")
-    number_of_rounds = int(input("Nombre de tours: "))
-    description = input("Description: ")
+
+    def get_validated_input(prompt, validation_func, error_message):
+        while True:
+            user_input = input(prompt)
+            if validation_func(user_input):
+                return user_input
+            else:
+                print(f"\033[91m{error_message}\033[0m")
+
+    def validate_date(date_str):
+        try:
+            datetime.strptime(date_str, '%Y-%m-%d')
+            return True
+        except ValueError:
+            return False
+
+    def validate_rounds(rounds_str):
+        return rounds_str.isdigit() and 1 <= int(rounds_str) <= 4
+
+    def validate_text(text_str):
+        return re.match("^[A-Za-zÀ-ÖØ-öø-ÿ ]+$", text_str) is not None
+
+    name = get_validated_input("Nom du tournoi: ", validate_text,
+                               "Le nom du tournoi ne doit contenir que des lettres et des espaces.")
+    location = get_validated_input("Lieu: ", validate_text, "Le lieu ne doit contenir que des lettres et des espaces.")
+    start_date = get_validated_input("Date de début (YYYY-MM-DD): ", validate_date,
+                                     "La date de début doit être au format YYYY-MM-DD.")
+    end_date = get_validated_input("Date de fin (YYYY-MM-DD): ", validate_date,
+                                   "La date de fin doit être au format YYYY-MM-DD.")
+    number_of_rounds = get_validated_input("Nombre de tours (1-4): ", validate_rounds,
+                                           "Le nombre de tours doit être un entier entre 1 et 4.")
+    description = get_validated_input("Description: ", validate_text,
+                                      "La description ne doit contenir que des lettres et des espaces.")
+
     return {
         "name": name,
         "location": location,
         "start_date": start_date,
         "end_date": end_date,
-        "number_of_rounds": number_of_rounds,
+        "number_of_rounds": int(number_of_rounds),
         "current_round": 0,
         "description": description
     }
