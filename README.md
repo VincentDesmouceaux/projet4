@@ -112,7 +112,7 @@ Le Gestionnaire de Tournoi d'Échecs est conçu pour aider les organisateurs à 
 2. **Sélectionnez "Lancer un Tournoi Existant"**
 
     Choisissez le tournoi que vous souhaitez lancer dans la liste.
-    L'application simulera les tours et les matchs, affichant les résultats.
+    L'application simulera les tours et les matchs, selon les résultats rentrés par l'utilisateur.
 
 ### Générer des Rapports
 
